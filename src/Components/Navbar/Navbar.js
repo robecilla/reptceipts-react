@@ -39,46 +39,22 @@ class Nav extends React.Component {
       <div>
         <Navbar isTransparent>
             <NavbarBrand>
-                <NavbarItem style={{ marginRight: 40 }} href='#/'>
+                <NavbarItem style={{ marginRight: 40 }} href='/'>
                 <img src={brand} alt='Brand'/>
                 reptceipts
                 </NavbarItem>
-
                 <NavbarItem isHidden='desktop'>
                     <Icon icon='github' />
                 </NavbarItem>
                 <NavbarItem isHidden='desktop'>
-                    <Icon
-                        icon='twitter'
-                        style={{ color: '#55acee' }} />
+                    <Icon icon='twitter' style={{ color: '#55acee' }} />
                 </NavbarItem>
-                <NavbarBurger
-                    isActive={this.state.isActive}
-                    onClick={this.onClickNav} />
+                <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
             </NavbarBrand>
-                <NavbarMenu
-                    isActive={this.state.isActive}
-                    onClick={this.onClickNav}>
-                    <NavbarStart>
-                        <NavbarItem href='#/' isHoverable>Home</NavbarItem>
-                        <NavbarItem hasDropdown isHoverable>
-                            <NavbarLink href='#/'>Documentation</NavbarLink>
-                            <NavbarDropdown>
-                                <NavbarItem href='#/'>
-                                    One A
-                                </NavbarItem>
-                                <NavbarItem href='#/'>
-                                    Two B
-                                </NavbarItem>
-                                <NavbarDivider />
-                                <NavbarItem href='#/'>
-                                    Two A
-                                </NavbarItem>
-                            </NavbarDropdown>
-                        </NavbarItem>
-                    </NavbarStart>
+                <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
                     <NavbarEnd>
-
+                      <NavbarItem href='#/' isHoverable>Login</NavbarItem>
+                      <NavbarItem href='#/' isHoverable>Register</NavbarItem>
                     </NavbarEnd>
                 </NavbarMenu>
         </Navbar>
