@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     Navbar,
     NavbarBrand,
@@ -15,10 +15,16 @@ import {
     Field,
     Control
 } from 'bloomer';
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink
+} from 'react-router-dom'
 
+import Login from '../Login/Login';
 import brand from '../../logo.svg';
 
-class Nav extends React.Component {
+class Nav extends Component {
 
   constructor() {
     super();
@@ -36,29 +42,37 @@ class Nav extends React.Component {
 
   render() {
     return (
-      <div>
-        <Navbar isTransparent>
-            <NavbarBrand>
-                <NavbarItem style={{ marginRight: 40 }} href='/'>
-                <img src={brand} alt='Brand'/>
-                reptceipts
-                </NavbarItem>
-                <NavbarItem isHidden='desktop'>
-                    <Icon icon='github' />
-                </NavbarItem>
-                <NavbarItem isHidden='desktop'>
-                    <Icon icon='twitter' style={{ color: '#55acee' }} />
-                </NavbarItem>
-                <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
-            </NavbarBrand>
-                <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
-                    <NavbarEnd>
-                      <NavbarItem href='#/' isHoverable>Login</NavbarItem>
-                      <NavbarItem href='#/' isHoverable>Register</NavbarItem>
-                    </NavbarEnd>
-                </NavbarMenu>
-        </Navbar>
-      </div>
+      <Navbar isTransparent>
+        <NavbarBrand>
+          <NavbarItem style={{ marginRight: 40 }}>
+            <img src={brand} alt='Brand'/>
+            <NavLink to="/">reptceipts</NavLink>
+          </NavbarItem>
+          <NavbarItem isHidden='desktop'>
+            <Icon icon='github' />
+          </NavbarItem>
+          <NavbarItem isHidden='desktop'>
+            <Icon
+              icon='twitter'
+              style={{ color: '#55acee' }} />
+          </NavbarItem>
+          <NavbarBurger
+            isActive={this.state.isActive}
+            onClick={this.onClickNav} />
+        </NavbarBrand>
+        <NavbarMenu
+          isActive={this.state.isActive}
+          onClick={this.onClickNav}>
+          <NavbarEnd>
+            <NavbarItem isHoverable>
+              <NavLink to="/login">Login</NavLink>
+            </NavbarItem>
+            <NavbarItem isHoverable>
+              <NavLink to="/register">Register</NavLink>
+            </NavbarItem>
+          </NavbarEnd>
+        </NavbarMenu>
+      </Navbar>
     );
   }
 }
