@@ -9,7 +9,7 @@ import {
 } from 'bloomer';
 
 
-class LandingHero extends React.Component {
+class LandingPage extends React.Component {
 
   constructor() {
     super();
@@ -25,13 +25,14 @@ class LandingHero extends React.Component {
 
           <HeroBody>
             <Container hasTextAlign='centered'>
-                <Title>Landing</Title>
+
             </Container>
           </HeroBody>
+
         </Hero>
       </div>
     );
   }
 }
 
-export default LandingHero;
+export default LandingPage;

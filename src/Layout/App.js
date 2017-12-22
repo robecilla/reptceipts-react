@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // Components
 //import Nav from '../Components/Navbar/Navbar';
-import LandingHero from '../Components/Hero/Hero';
+import LandingPage from '../Components/LandingPage/LandingPage';
 import { Container } from 'bloomer';
 
 // Styles
@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
           <Container>
-            <LandingHero />
+            <LandingPage />
           </Container>
       </div>
     );
