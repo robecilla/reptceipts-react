@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Landing from '../Landing/Landing';
 import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -17,6 +18,7 @@ class Main extends Component {
       <Switch>
         <Route exact path='/' component={Landing}/>
         <Route path='/login' component={Login}/>
+        <Route path='/register' component={Register}/>
       </Switch>
     );
   }

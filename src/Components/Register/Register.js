@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 // Components
 import { Container, HeroBody, Title } from 'bloomer';
 
-class Login extends Component {
+class Register extends Component {
 
   render() {
     return (
       <HeroBody>
         <Container hasTextAlign='centered'>
-          <Title isSize={1}>LOGIN</Title>
+          <Title isSize={1}>REGISTER</Title>
         </Container>
       </HeroBody>
     );
   }
 }
 
-export default Login;
+export default Register;
