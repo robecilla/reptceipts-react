@@ -13,16 +13,26 @@ import {
     Button,
     Icon,
     Field,
-    Control
+    Control,
+    Tile,
+    Box,
+    Title,
+    Container,
+    Columns,
+    Column,
+    Notification,
+    Label,
+    Input,
+    Checkbox
 } from 'bloomer';
 
 import {
   BrowserRouter as Router,
   Route,
   NavLink
-} from 'react-router-dom'
+} from 'react-router-dom';
 
-import brand from '../../logo.svg';
+import Brand from './Brand';
 
 class Nav extends Component {
 
@@ -43,35 +53,53 @@ class Nav extends Component {
   render() {
     return (
       <Navbar isTransparent>
-        <NavbarBrand>
-          <NavbarItem style={{ marginRight: 40 }}>
-            <img src={brand} alt='Brand'/>
-            <NavLink to="/">reptceipts</NavLink>
-          </NavbarItem>
-          <NavbarItem isHidden='desktop'>
-            <Icon icon='github' />
-          </NavbarItem>
-          <NavbarItem isHidden='desktop'>
-            <Icon
-              icon='twitter'
-              style={{ color: '#55acee' }} />
-          </NavbarItem>
-          <NavbarBurger
-            isActive={this.state.isActive}
-            onClick={this.onClickNav} />
-        </NavbarBrand>
-        <NavbarMenu
-          isActive={this.state.isActive}
-          onClick={this.onClickNav}>
+
+        <Brand />
+
+        <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
           <NavbarEnd>
-            <NavbarItem isHoverable>
-              <NavLink to="/login">Login</NavLink>
-            </NavbarItem>
-            <NavbarItem isHoverable>
-              <NavLink to="/register">Register</NavLink>
-            </NavbarItem>
-          </NavbarEnd>
-        </NavbarMenu>
+            <NavbarItem isHoverable hasDropdown>
+              <NavbarLink>Login</NavbarLink>
+              <NavbarDropdown>
+                <Container isFluid>
+                    <Column style={{ width: '300px' }}>
+                      <Field>
+                          <Label>Username</Label>
+                          <Control hasIcons>
+                              <Input placeholder='Username'/>
+                              <Icon isSize='small' isAlign='left'>
+                                  <span className="fa fa-user" aria-hidden="true" />
+                              </Icon>
+                          </Control>
+                      </Field>
+                      <Field>
+                          <Label>Password</Label>
+                          <Control hasIcons>
+                              <Input placeholder='Password' type='password' />
+                              <Icon isSize='small' isAlign='left'>
+                                  <span className="fa fa-user" aria-hidden="true" />
+                              </Icon>
+                          </Control>
+                      </Field>
+                      <Field>
+                          <Control>
+                              <Checkbox> Remember me? </Checkbox>
+                          </Control>
+                      </Field>
+                      <Field isGrouped>
+                          <Control>
+                              <Button isColor='primary' isPulled='left'>Log in</Button>
+                          </Control>
+                      </Field>
+                    </Column>
+                </Container>
+                    </NavbarDropdown>
+                  </NavbarItem>
+                  <NavbarItem isHoverable>
+                    <NavLink to="/register">Register</NavLink>
+                  </NavbarItem>
+                </NavbarEnd>
+              </NavbarMenu>
       </Navbar>
     );
   }
