@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-import {
-    Hero,
-    HeroBody,
-    HeroHeader,
-    Container,
-    Title
-} from 'bloomer';
+import { HeroBody, Container, Title } from 'bloomer';
 
-
-class WillRename extends Component {
-
-  constructor() {
-    super();
-  }
+class Landing extends Component {
 
   render() {
     return (
@@ -25,4 +14,4 @@ class WillRename extends Component {
   }
 }
 
-export default WillRename;
+export default Landing;

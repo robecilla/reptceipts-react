@@ -15,13 +15,13 @@ import {
     Field,
     Control
 } from 'bloomer';
+
 import {
   BrowserRouter as Router,
   Route,
   NavLink
 } from 'react-router-dom'
 
-import Login from '../Login/Login';
 import brand from '../../logo.svg';
 
 class Nav extends Component {
