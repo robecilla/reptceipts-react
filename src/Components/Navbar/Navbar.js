@@ -1,38 +1,17 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import {
     Navbar,
-    NavbarBrand,
     NavbarItem,
-    NavbarBurger,
     NavbarMenu,
-    NavbarStart,
     NavbarLink,
     NavbarDropdown,
-    NavbarDivider,
-    NavbarEnd,
-    Button,
-    Icon,
-    Field,
-    Control,
-    Tile,
-    Box,
-    Title,
-    Container,
-    Columns,
-    Column,
-    Notification,
-    Label,
-    Input,
-    Checkbox
+    NavbarEnd
 } from 'bloomer';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink
-} from 'react-router-dom';
-
 import Brand from './Brand';
+import Login from '../Login/Login';
 
 class Nav extends Component {
 
@@ -40,67 +19,35 @@ class Nav extends Component {
     super();
     this.state = {isActive: false};
     // This binding is necessary to make `this` work in the callback
-    this.onClickNav = this.onClickNav.bind(this);
+    this.burgerClick = this.burgerClick.bind(this);
   }
 
-  onClickNav() {
+  burgerClick(newState) {
     // Open and closes menu when mobile
-    this.setState(prevState => ({
-      isActive: !prevState.isActive
-    }));
+	this.setState({ isActive: newState })
   }
 
   render() {
     return (
-      <Navbar isTransparent>
+		<Navbar isTransparent>
 
-        <Brand />
+			<Brand isMenuOpen={this.state.isActive}
+				   callbackParent={(newState) => this.burgerClick(newState)} />
 
-        <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
-          <NavbarEnd>
-            <NavbarItem isHoverable hasDropdown>
-              <NavbarLink>Login</NavbarLink>
-              <NavbarDropdown>
-                <Container isFluid>
-                    <Column style={{ width: '300px' }}>
-                      <Field>
-                          <Label>Username</Label>
-                          <Control hasIcons>
-                              <Input placeholder='Username'/>
-                              <Icon isSize='small' isAlign='left'>
-                                  <span className="fa fa-user" aria-hidden="true" />
-                              </Icon>
-                          </Control>
-                      </Field>
-                      <Field>
-                          <Label>Password</Label>
-                          <Control hasIcons>
-                              <Input placeholder='Password' type='password' />
-                              <Icon isSize='small' isAlign='left'>
-                                  <span className="fa fa-user" aria-hidden="true" />
-                              </Icon>
-                          </Control>
-                      </Field>
-                      <Field>
-                          <Control>
-                              <Checkbox> Remember me? </Checkbox>
-                          </Control>
-                      </Field>
-                      <Field isGrouped>
-                          <Control>
-                              <Button isColor='primary' isPulled='left'>Log in</Button>
-                          </Control>
-                      </Field>
-                    </Column>
-                </Container>
-                    </NavbarDropdown>
-                  </NavbarItem>
-                  <NavbarItem isHoverable>
-                    <NavLink to="/register">Register</NavLink>
-                  </NavbarItem>
-                </NavbarEnd>
-              </NavbarMenu>
-      </Navbar>
+			<NavbarMenu isActive={this.state.isActive} >
+				<NavbarEnd>
+					<NavbarItem isHoverable hasDropdown >
+						<NavbarLink>Login</NavbarLink>
+						<NavbarDropdown isBoxed className={'is-right'} isHidden='mobile'>
+							<Login />
+						</NavbarDropdown>
+					</NavbarItem>
+					<NavbarItem isHoverable>
+						<NavLink to="/register">Register</NavLink>
+					</NavbarItem>
+				</NavbarEnd>
+			</NavbarMenu>
+		</Navbar>
     );
   }
 }

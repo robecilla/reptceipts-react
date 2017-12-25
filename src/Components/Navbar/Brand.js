@@ -6,18 +6,17 @@ import brand from '../../logo.svg';
 
 class Brand extends Component {
 
-  constructor() {
+  constructor(props) {
     super();
-    this.state = {isActiveBurger: false};
+    this.state = {isActiveBurger: props.isMenuOpen};
     // This binding is necessary to make `this` work in the callback
     this.onClickBurger = this.onClickBurger.bind(this);
   }
 
   onClickBurger() {
-    // Open and closes menu when mobile
-    this.setState(prevState => ({
-      isActiveBurger: !prevState.isActiveBurger
-    }));
+	const newState = !this.state.isActiveBurger;
+	this.setState({ isActiveBurger: newState }); // we update our state
+	this.props.callbackParent(newState); // we notify our parent
   }
 
   render() {
