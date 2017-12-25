@@ -5,13 +5,14 @@ import { BrowserRouter } from 'react-router-dom'
 import 'bulma/css/bulma.css'
 import './index.css';
 
-import App from './App';
+import Layout from './Layout/Layout';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Layout />
   </BrowserRouter>
   , document.getElementById('root')
 );
+
 registerServiceWorker();
