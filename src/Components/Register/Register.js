@@ -10,8 +10,8 @@ class Register extends Component {
 	<HeroBody>
 		<Container>
 			<Columns>
-				<Column isSize={{ mobile: 'full', desktop: 4 }}>
-					<Title isSize={3}>Create an account</Title>
+				<Column isSize={{ mobile: 'full', desktop: 3 }}>
+					<Title isSize={3} className={'has-text-weight-light'}>Create an account</Title>
 
 				{ /* RegisterForm component, passing parameters depending on the kind of registration? */ }
 

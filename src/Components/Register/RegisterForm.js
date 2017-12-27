@@ -5,23 +5,22 @@ import './Register.css';
 
 class RegisterForm extends Component {
 
-  // constructor(props) {
-  //   super();
-  //   this.state = {isActiveBurger: props.isMenuOpen};
-  //   // This binding is necessary to make `this` work in the callback
-  //   this.onClickBurger = this.onClickBurger.bind(this);
-  // }
-
+  constructor(props) {
+    super();
+    this.state = {isActiveBurger: props.isMenuOpen};
+    // This binding is necessary to make `this` work in the callback
+    //this.showLogin = this.showLogin.bind(this);
+  }
 
   render() {
     return (
 		<div>
 			<Field>
-				<Label className={'has-text-white-bis'}>Email</Label>
+				<Label className={'has-text-white-bis'}>Pick a username</Label>
 				<Control hasIcons>
 				  <Input  className={'input-black'}
-						  placeholder='Username'
 						  isColor='light'
+						  type='text'
 						   />
 				  <Icon isSize='small' isAlign='left'>
 					  <span className="fa fa-user" aria-hidden="true" />
@@ -29,10 +28,21 @@ class RegisterForm extends Component {
 				</Control>
 			</Field>
 			<Field>
-				<Label className={'has-text-white-bis'}>Password</Label>
+				<Label className={'has-text-white-bis'}>Your e-mail</Label>
 				<Control hasIcons>
 				  <Input  className={'input-black'}
-						  placeholder='Password'
+						  isColor='light'
+						  type='email'
+						   />
+				  <Icon isSize='small' isAlign='left'>
+					  <span className="fa fa-at" aria-hidden="true" />
+				  </Icon>
+				</Control>
+			</Field>
+			<Field>
+				<Label className={'has-text-white-bis'}>Create a password</Label>
+				<Control hasIcons>
+				  <Input  className={'input-black'}
 						  isColor='light'
 						  type='password'
 						   />
@@ -41,18 +51,15 @@ class RegisterForm extends Component {
 				  </Icon>
 				</Control>
 			</Field>
+			<br/>
 			<Field>
 				<Control>
-				  <Checkbox hasTextColor='white'> I agree the terms and conditons </Checkbox>
+				  <Button isColor='warning' isOutlined  isFullWidth>Sign Up</Button>
 				</Control>
 			</Field>
-			<hr />
 			<Field>
 				<Control>
-				  <Button isColor='light' isOutlined  isPulled='left'>Sign Up</Button>
-				</Control>
-				<Control>
-				  <Button isColor='dark' isPulled='right'>Already registered?</Button>
+				  <Button isColor='dark' isFullWidth onClick={this.showLogin}>.. or Log In</Button>
 				</Control>
 			</Field>
   		</div>
