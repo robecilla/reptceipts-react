@@ -43,7 +43,7 @@ class LoginForm extends Component {
 		<Field>
 			<Label>Your Password</Label>
 			<Control hasIcons='left'>
-				<Input type='password'  />
+				<Input type='password' />
 				<Icon isSize='small' isAlign='left'>
 					<span className="fa fa-key" aria-hidden="true" />
 				</Icon>
@@ -56,7 +56,7 @@ class LoginForm extends Component {
 		</Field>
 		<Field>
 			<Control>
-				<Button type="submit" isColor='dark' isFullWidth isLoading={this.state.isButtonLoading}>
+				<Button type="submit" isColor='warning' isFullWidth isLoading={this.state.isButtonLoading}>
 					Log in
 				</Button>
 			</Control>
