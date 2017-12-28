@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Register from '../Register/Register';
+import Landing from '../Landing/Landing';
 import Menu from '../Menu/Menu';
 
 class Main extends Component {
-
   render() {
     return (
-		<Switch>
-			<Route exact path='/' component={Register} />
-			<Route path='/menu' component={Menu} />
-		</Switch>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route path="/menu" component={Menu} />
+      </Switch>
     );
   }
 }
