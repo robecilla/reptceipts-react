@@ -40,7 +40,7 @@ class Nav extends Component {
             <NavbarItem isHoverable>
               <NavLink to="/menu">Menu</NavLink>
             </NavbarItem>
-            <NavbarItem isHoverable isActive={this.context}>
+            <NavbarItem isHoverable isActive={this.state.isLoginActive}>
               <NavbarLink>Login</NavbarLink>
               <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed>
                 <Login />
