@@ -1,17 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import login from './Reducers/loginNav';
+import registerServiceWorker from './registerServiceWorker';
+
+import App from './App/App';
 
 import 'bulma/css/bulma.css';
 import './index.css';
 
-import Layout from './Layout/Layout';
-import registerServiceWorker from './registerServiceWorker';
+let store = createStore(
+  login,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Layout />
-  </BrowserRouter>,
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 
