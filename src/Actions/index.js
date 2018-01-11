@@ -5,24 +5,22 @@ export const UNAUTH_USER = 'unauth_user';
 export const AUTH_ERROR = 'auth_error';
 export const FETCH_MESSAGE = 'fetch_message';
 
-const ROOT_URL = 'http://localhost:3000';
+const ROOT_URL = 'https://reptceipts.dev';
 
-export function signinUser({ email, password }) {
+export function signinUser(values) {
   return function(dispatch) {
-    // submit email and password to server
-    const request = axios.post(`${ROOT_URL}/signin`, { email, password });
+    // Here values handles email and password
+    const request = axios.post(`${ROOT_URL}/api/login`, values);
     request
       .then(response => {
-        // -Save the JWT token
-        //localStorage.setItem('token', response.data.token)
-        // -if request is good, we need to update state to indicate user is authenticated
-        //dispatch({type: AUTH_USER})
+        // Save user specific JWT
+        localStorage.setItem('token', response.data.token);
+        // If request went good, dispatch redux action to change auth state
+        dispatch({ type: AUTH_USER });
       })
-
-      // If request is bad...
-      // -Show an error to the user
-      .catch(() => {
-        //dispatch(authError('bad login info'))
+      // If bad request, call the error handler
+      .catch(error => {
+        dispatch(authError(error.response.data));
       });
   };
 }

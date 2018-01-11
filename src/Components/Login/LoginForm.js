@@ -1,87 +1,59 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import {
-  Field as FieldBloomer,
-  Label,
-  Control,
-  Input,
-  Icon,
-  Checkbox,
-  Button
-} from 'bloomer';
+import { reduxForm } from 'redux-form';
+// import { connect } from 'react-redux';
+import { Field as FieldBloomer, Control, Button, Notification } from 'bloomer';
 
-import { BloomerField } from './BloomerField';
+import BloomerField from './BloomerField';
 
 class LoginForm extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = { isButtonLoading: false };
-  //   // This binding is necessary to make `this` work in the callback
-  //   this.handleSubmit = this.handleSubmit.bind(this);
-  // }
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //
-  //   // do validation here, if all passed the continue
-  //
-  //   // button loading
-  //   this.setState({ isButtonLoading: true });
-  //   // Simulated for now
-  //   setTimeout(function() {
-  //     console.log('submitted!');
-  //
-  //     //redirect here to user dashboard
-  //     window.location = '/';
-  //   }, 2000);
-  // }
+  renderError() {
+    if (this.props.errorMessage) {
+      return (
+        <Notification isColor="danger" hasTextAlign="centered">
+          {this.props.errorMessage}
+        </Notification>
+      );
+    }
+  }
 
   render() {
     const { handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
-        <Field component={BloomerField} label="Your e-mail" type="email" />
+      <div>
+        <form onSubmit={handleSubmit}>
+          {/* If there's an error it will show up here */}
 
-        <button type="submit">Sign In</button>
+          {this.renderError()}
 
-        {/* <FieldBloomer>
-          <Label> Your Email </Label>
-          <Control hasIcons="left">
-            <Input type="email" />
-            <Icon isSize="small" isAlign="left">
-              <span className="fa fa-at" aria-hidden="true" />
-            </Icon>
-          </Control>
-        </FieldBloomer>
+          <BloomerField
+            component="input"
+            name="email"
+            type="email"
+            label="Your e-mail"
+            icon="fa fa-at"
+            className="input"
+          />
 
+          <BloomerField
+            component="input"
+            name="password"
+            type="password"
+            label="Your Password"
+            icon="fa fa-key"
+            className="input"
+          />
 
-        <FieldBloomer>
-          <Label>Your Password</Label>
-          <Control hasIcons="left">
-            <Input type="password" />
-            <Icon isSize="small" isAlign="left">
-              <span className="fa fa-key" aria-hidden="true" />
-            </Icon>
-          </Control>
-        </FieldBloomer>
-        <FieldBloomer>
-          <Control hasTextAlign="centered">
-            <Checkbox hasTextColor="dark"> Remember me? </Checkbox>
-          </Control>
-        </FieldBloomer>
-        <FieldBloomer>
-          <Control>
-            <Button
-              type="submit"
-              isColor="warning"
-              isFullWidth
-              isLoading={this.state.isButtonLoading}
-            >
-              Log in
-            </Button>
-          </Control>
-        </FieldBloomer> */}
-      </form>
+          <br />
+
+          <FieldBloomer>
+            <Control>
+              <Button type="submit" isColor="warning" isFullWidth>
+                Log in
+              </Button>
+            </Control>
+          </FieldBloomer>
+        </form>
+      </div>
     );
   }
 }
