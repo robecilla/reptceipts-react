@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Columns, Column } from 'bloomer';
 import * as actions from '../../Actions';
 import { connect } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import LoginForm from './LoginForm';
 
 const loginStyle = {
@@ -27,7 +27,16 @@ class Login extends Component {
   }
 
   render() {
-    return (
+    return this.props.authenticated ? (
+      <Redirect
+        to={{
+          pathname: 'menu/dashboard',
+          state: {
+            from: '/'
+          }
+        }}
+      />
+    ) : (
       <Container isFluid>
         <Columns>
           <Column style={loginStyle}>

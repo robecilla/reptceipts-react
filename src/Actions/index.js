@@ -20,7 +20,9 @@ export function signinUser(values) {
       })
       // If bad request, call the error handler
       .catch(error => {
-        dispatch(authError(error.response.data));
+        if (error) {
+          dispatch(authError(error.response.data));
+        }
       });
   };
 }
