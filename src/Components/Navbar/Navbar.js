@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {
   Navbar,
@@ -23,6 +24,33 @@ class Nav extends Component {
     this.burgerClick = this.burgerClick.bind(this);
   }
 
+  links() {
+    if (this.props.authenticated) {
+      return (
+        <NavbarEnd>
+          <NavbarItem isHoverable isActive={this.state.isLoginActive}>
+            <NavbarLink>User Name</NavbarLink>
+            <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed />
+          </NavbarItem>
+        </NavbarEnd>
+      );
+    } else {
+      return (
+        <NavbarEnd>
+          <NavbarItem isHoverable>
+            <NavLink to="/menu">Menu</NavLink>
+          </NavbarItem>
+          <NavbarItem isHoverable isActive={this.state.isLoginActive}>
+            <NavbarLink>Login</NavbarLink>
+            <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed>
+              <Login />
+            </NavbarDropdown>
+          </NavbarItem>
+        </NavbarEnd>
+      );
+    }
+  }
+
   burgerClick(newState) {
     // Open and closes menu when mobile
     this.setState({ isActive: newState });
@@ -35,22 +63,16 @@ class Nav extends Component {
           isMenuOpen={this.state.isMenuOpen}
           callbackParent={newState => this.burgerClick(newState)}
         />
-        <NavbarMenu isActive={this.state.isActive}>
-          <NavbarEnd>
-            <NavbarItem isHoverable>
-              <NavLink to="/menu">Menu</NavLink>
-            </NavbarItem>
-            <NavbarItem isHoverable isActive={this.state.isLoginActive}>
-              <NavbarLink>Login</NavbarLink>
-              <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed>
-                <Login />
-              </NavbarDropdown>
-            </NavbarItem>
-          </NavbarEnd>
-        </NavbarMenu>
+        <NavbarMenu isActive={this.state.isActive}>{this.links()}</NavbarMenu>
       </Navbar>
     );
   }
 }
 
-export default Nav;
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  };
+}
+
+export default connect(mapStateToProps)(Nav);

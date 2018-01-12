@@ -23,20 +23,12 @@ class Login extends Component {
   }
 
   handleSubmit(values) {
-    this.props.signinUser(values);
+    console.log(this.props.history);
+    this.props.signinUser(values, this.props.history);
   }
 
   render() {
-    return this.props.authenticated ? (
-      <Redirect
-        to={{
-          pathname: 'menu/dashboard',
-          state: {
-            from: '/'
-          }
-        }}
-      />
-    ) : (
+    return (
       <Container isFluid>
         <Columns>
           <Column style={loginStyle}>
@@ -53,7 +45,6 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated,
     errorMessage: state.auth.error
   };
 }
