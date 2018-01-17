@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Landing from '../Landing/Landing';
 import Menu from '../Menu/Menu';
+import Logout from '../Login/Logout';
 
 class Main extends Component {
   render() {
@@ -10,6 +11,7 @@ class Main extends Component {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route path="/menu" component={Menu} />
+        <Route path="/signout" component={Logout} />
       </Switch>
     );
   }

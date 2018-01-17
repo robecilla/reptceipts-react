@@ -32,6 +32,9 @@ class Nav extends Component {
             <NavbarLink>User Name</NavbarLink>
             <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed />
           </NavbarItem>
+          <NavbarItem isHoverable>
+            <NavLink to="/signout">Log Out</NavLink>
+          </NavbarItem>
         </NavbarEnd>
       );
     } else {
