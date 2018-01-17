@@ -28,21 +28,23 @@ class Nav extends Component {
     if (this.props.authenticated) {
       return (
         <NavbarEnd>
-          <NavbarItem isHoverable isActive={this.state.isLoginActive}>
+          <NavbarItem hasDropdown isHoverable>
             <NavbarLink>User Name</NavbarLink>
-            <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed />
+            <NavbarDropdown isHidden="mobile" isBoxed>
+              <NavbarItem hasTextColor="dark">
+                <NavLink to="/signout">Log Out</NavLink>
+              </NavbarItem>
+            </NavbarDropdown>
           </NavbarItem>
+
           <NavbarItem isHoverable>
-            <NavLink to="/signout">Log Out</NavLink>
+            <NavLink to="/menu">Menu</NavLink>
           </NavbarItem>
         </NavbarEnd>
       );
     } else {
       return (
         <NavbarEnd>
-          <NavbarItem isHoverable>
-            <NavLink to="/menu">Menu</NavLink>
-          </NavbarItem>
           <NavbarItem isHoverable isActive={this.state.isLoginActive}>
             <NavbarLink>Login</NavbarLink>
             <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed>
