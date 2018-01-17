@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
 import { Field } from 'redux-form';
-import { Field as FieldBloomer, Label, Control, Icon } from 'bloomer';
+import { Field as FieldBloomer, Label, Control, Icon, Heading } from 'bloomer';
 
 class BloomerField extends Component {
   render() {
-    const { component, name, type, label, icon, className } = this.props;
+    const {
+      component,
+      name,
+      type,
+      label,
+      heading,
+      icon,
+      className
+    } = this.props;
+    let tag;
+    if (label) {
+      tag = <Label>{label}</Label>;
+    } else if (heading) {
+      tag = <Heading>{heading}</Heading>;
+    }
     return (
       <FieldBloomer>
-        <Label>{label}</Label>
+        {tag}
+
         <Control hasIcons="left">
           <Field
             name={name}

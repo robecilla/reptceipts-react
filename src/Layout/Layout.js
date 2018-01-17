@@ -15,14 +15,6 @@ class Layout extends Component {
 
           <Main />
         </Hero>
-
-        <Hero isColor="light" isFullHeight>
-          <HeroBody>
-            <Container hasTextAlign="centered">
-              <Title isSize={3}>How it works, etc ... </Title>
-            </Container>
-          </HeroBody>
-        </Hero>
       </div>
     );
   }

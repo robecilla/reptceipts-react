@@ -16,7 +16,7 @@ import './Menu.css';
 class MenuBar extends Component {
   render() {
     return (
-      <HeroBody style={{ 'align-items': 'initial' }}>
+      <HeroBody style={{ alignItems: 'initial' }}>
         <Container isMarginless>
           <Columns>
             <Column isSize={{ desktop: 2 }} isHidden="mobile">
