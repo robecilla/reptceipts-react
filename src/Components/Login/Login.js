@@ -3,6 +3,8 @@ import { Container, Columns, Column } from 'bloomer';
 import * as actions from '../../Actions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import LoginForm from './LoginForm';
 
 const loginStyle = {
@@ -11,8 +13,12 @@ const loginStyle = {
 };
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  constructor(props, context) {
+    super(props, context);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -23,13 +29,12 @@ class Login extends Component {
   }
 
   handleSubmit(values) {
-    console.log(this.props.history);
-    this.props.signinUser(values, this.props.history);
+    this.props.signinUser(values, this.context.router.history);
   }
 
   render() {
     return (
-      <Container isFluid>
+      <Container isFluid="isFluid">
         <Columns>
           <Column style={loginStyle}>
             <LoginForm
@@ -44,9 +49,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    errorMessage: state.auth.error
-  };
+  return { errorMessage: state.auth.error };
 }
 
 export default connect(mapStateToProps, actions)(Login);
