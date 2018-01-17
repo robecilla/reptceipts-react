@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Container, Columns, Column } from 'bloomer';
 import * as actions from '../../Actions';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import LoginForm from './LoginForm';

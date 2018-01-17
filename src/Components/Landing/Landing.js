@@ -10,6 +10,10 @@ import {
   Image
 } from 'bloomer';
 
+import * as actions from '../../Actions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import RegisterForm from '../Register/RegisterForm';
 
 import s8 from '../../Assets/img/s8-render.png';
@@ -25,6 +29,25 @@ const s8position = {
 // }
 
 class Register extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  constructor(props, context) {
+    super(props, context);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
+    if (this.props.errorMessage) {
+      this.props.authError(null);
+    }
+  }
+
+  handleSubmit(values) {
+    this.props.registerUser(values, this.context.router.history);
+  }
+
   render() {
     return (
       <HeroBody style={{ alignItems: 'initial' }}>
@@ -45,7 +68,10 @@ class Register extends Component {
               isSize={{ mobile: 'full', desktop: 6, widescreen: 4 }}
               isOffset={{ desktop: 2 }}
             >
-              <RegisterForm />
+              <RegisterForm
+                onSubmit={this.handleSubmit}
+                errorMessage={this.props.errorMessage}
+              />
             </Column>
           </Columns>
         </Container>
@@ -64,4 +90,8 @@ class Register extends Component {
   }
 }
 
-export default Register;
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error };
+}
+
+export default connect(mapStateToProps, actions)(Register);

@@ -1,64 +1,76 @@
 import React, { Component } from 'react';
-import { Field, Control, Input, Icon, Button, Heading } from 'bloomer';
-
+import { reduxForm } from 'redux-form';
+import { Field as FieldBloomer, Control, Button, Notification } from 'bloomer';
+import BloomerField from '../Login/BloomerField';
 import './Register.css';
 
 class RegisterForm extends Component {
-  constructor(props) {
-    super();
-    this.state = { isActiveBurger: props.isMenuOpen };
-    // This binding is necessary to make `this` work in the callback
-    //this.showLogin = this.showLogin.bind(this);
+  renderError() {
+    if (this.props.errorMessage) {
+      return (
+        <Notification isColor="danger" hasTextAlign="centered">
+          {this.props.errorMessage}
+        </Notification>
+      );
+    }
   }
 
   render() {
+    const { handleSubmit } = this.props;
     return (
-      <form>
-        <Field>
-          <Heading>Pick a username</Heading>
-          <Control hasIcons>
-            <Input className={'input-black'} isColor="light" type="text" />
-            <Icon isSize="small" isAlign="left">
-              <span className="fa fa-user" aria-hidden="true" />
-            </Icon>
-          </Control>
-        </Field>
-        <Field>
-          <Heading>Your e-mail</Heading>
-          <Control hasIcons>
-            <Input className={'input-black'} isColor="light" type="email" />
-            <Icon isSize="small" isAlign="left">
-              <span className="fa fa-at" aria-hidden="true" />
-            </Icon>
-          </Control>
-        </Field>
-        <Field>
-          <Heading>Create a password</Heading>
-          <Control hasIcons>
-            <Input className={'input-black'} isColor="light" type="password" />
-            <Icon isSize="small" isAlign="left">
-              <span className="fa fa-key" aria-hidden="true" />
-            </Icon>
-          </Control>
-        </Field>
+      <form onSubmit={handleSubmit}>
+        {/* If there's an error it will show up here */}
+
+        {this.renderError()}
+
+        <BloomerField
+          component="input"
+          name="name"
+          type="text"
+          heading="Pick a username"
+          icon="fa fa-user"
+          className="input"
+        />
+
+        <BloomerField
+          component="input"
+          name="email"
+          type="email"
+          heading="Your e-mail"
+          icon="fa fa-at"
+          className="input"
+        />
+
+        <BloomerField
+          component="input"
+          name="password"
+          type="password"
+          heading="Create a password"
+          icon="fa fa-key"
+          className="input"
+        />
+
         <br />
-        <Field>
+
+        <FieldBloomer>
           <Control>
-            <Button isColor="warning" isOutlined isFullWidth>
+            <Button type="submit" isColor="warning" isOutlined isFullWidth>
               Sign Up
             </Button>
           </Control>
-        </Field>
-        <Field>
+        </FieldBloomer>
+        <FieldBloomer>
           <Control>
             <Button isColor="dark" isFullWidth onClick={this.showLogin}>
               .. or Log In
             </Button>
           </Control>
-        </Field>
+        </FieldBloomer>
       </form>
     );
   }
 }
 
-export default RegisterForm;
+export default reduxForm({
+  form: 'register'
+})(RegisterForm);
