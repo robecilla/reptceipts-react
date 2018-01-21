@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-export const PrivateRoute = ({ component: inComponent, ...rest }) => {
+export const PrivateRoute = ({ component: ComponentPassed, ...rest }) => {
   class Auth extends Component {
     handleRender(props) {
       /* Redirects to '/' (Landing) component if not authenticated */
@@ -20,7 +20,7 @@ export const PrivateRoute = ({ component: inComponent, ...rest }) => {
         );
       } else {
         /* else returns the component passed in */
-        return <inComponent {...props} />;
+        return <ComponentPassed {...props} />;
       }
     }
 
