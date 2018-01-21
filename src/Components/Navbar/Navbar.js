@@ -15,37 +15,47 @@ import Brand from './Brand';
 import Login from '../Login/Login';
 
 class Nav extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(this.props);
     this.state = {
-      isMenuOpen: false,
-      isLoginActive: false
+      isMenuOpen: false
     };
     this.burgerClick = this.burgerClick.bind(this);
   }
 
   links() {
+    let loggedin;
+    if (typeof this.props.user === 'undefined') {
+      loggedin = 'Loading...';
+    } else {
+      loggedin = this.props.user.name;
+    }
+
     if (this.props.authenticated) {
       return (
         <NavbarEnd>
+          <NavbarItem isHoverable>
+            <NavLink to="/menu/dashboard">Menu</NavLink>
+          </NavbarItem>
           <NavbarItem hasDropdown isHoverable>
-            <NavbarLink>User Name</NavbarLink>
+            <NavbarLink> {loggedin} </NavbarLink>
             <NavbarDropdown isHidden="mobile" isBoxed>
               <NavbarItem hasTextColor="dark">
                 <NavLink to="/signout">Log Out</NavLink>
               </NavbarItem>
             </NavbarDropdown>
           </NavbarItem>
-
-          <NavbarItem isHoverable>
-            <NavLink to="/menu">Menu</NavLink>
-          </NavbarItem>
         </NavbarEnd>
       );
     } else {
       return (
         <NavbarEnd>
-          <NavbarItem isHoverable isActive={this.state.isLoginActive}>
+          <NavbarItem
+            hasDropdown
+            isHoverable
+            isActive={this.props.isLoginActive}
+          >
             <NavbarLink>Login</NavbarLink>
             <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed>
               <Login />
@@ -68,7 +78,8 @@ class Nav extends Component {
           isMenuOpen={this.state.isMenuOpen}
           callbackParent={newState => this.burgerClick(newState)}
         />
-        <NavbarMenu isActive={this.state.isActive}>{this.links()}</NavbarMenu>
+        {/* Injecting links */}
+        <NavbarMenu isActive={this.state.isActive}> {this.links()} </NavbarMenu>
       </Navbar>
     );
   }
@@ -76,7 +87,9 @@ class Nav extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    user: state.auth.user,
+    isLoginActive: state.ui.isLoginActive
   };
 }
 

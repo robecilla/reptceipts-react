@@ -6,6 +6,8 @@ export const AUTH_ERROR = 'auth_error';
 export const FETCH_MESSAGE = 'fetch_message';
 export const SET_USER = 'set_user';
 
+export const OPEN_LOGIN = 'open_login';
+
 const ROOT_URL = 'https://reptceipts.com';
 
 /* Login */

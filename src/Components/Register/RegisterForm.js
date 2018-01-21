@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { OPEN_LOGIN } from '../../Actions';
+import { connect } from 'react-redux';
 import { Field as FieldBloomer, Control, Button, Notification } from 'bloomer';
 import BloomerField from '../Login/BloomerField';
 import './Register.css';
@@ -61,7 +63,15 @@ class RegisterForm extends Component {
         </FieldBloomer>
         <FieldBloomer>
           <Control>
-            <Button isColor="dark" isFullWidth onClick={this.showLogin}>
+            <Button
+              isColor="dark"
+              isFullWidth
+              onClick={() =>
+                this.props.dispatch({
+                  type: OPEN_LOGIN
+                })
+              }
+            >
               .. or Log In
             </Button>
           </Control>
