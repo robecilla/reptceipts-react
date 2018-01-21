@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Hero, HeroHeader, HeroBody, Title, Container } from 'bloomer';
+import { Hero, HeroHeader } from 'bloomer';
 
 import Navbar from '../Components/Navbar/Navbar';
 import Main from '../Components/Main/Main';

@@ -7,7 +7,9 @@ import {
   Columns,
   Column,
   HeroBody,
-  Container
+  Container,
+  Box,
+  Content
 } from 'bloomer';
 import Dashboard from './Dashboard/Dashboard';
 
@@ -39,9 +41,13 @@ class MenuBar extends Component {
               </Menu>
             </Column>
             <Column isSize={{ desktop: 10 }}>
-              <Switch>
-                <Route path="/menu/dashboard" component={Dashboard} />
-              </Switch>
+              <Box>
+                <Content>
+                  <Switch>
+                    <Route path="/menu/dashboard" component={Dashboard} />
+                  </Switch>
+                </Content>
+              </Box>
             </Column>
           </Columns>
         </Container>
