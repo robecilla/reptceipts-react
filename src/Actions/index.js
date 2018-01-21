@@ -4,6 +4,7 @@ export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
 export const AUTH_ERROR = 'auth_error';
 export const FETCH_MESSAGE = 'fetch_message';
+export const SET_USER = 'set_user';
 
 const ROOT_URL = 'https://reptceipts.com';
 
@@ -76,5 +77,33 @@ export function signoutUser() {
   localStorage.removeItem('token');
   return {
     type: UNAUTH_USER
+  };
+}
+
+export function getUser() {
+  return function(dispatch) {
+    axios.defaults.headers.common['Authorization'] =
+      'Bearer ' + localStorage.getItem('token');
+    axios({
+      method: 'GET',
+      url: `${ROOT_URL}/api/user`
+    })
+      .then(response => {
+        console.log(response.data);
+        dispatch({ type: SET_USER, payload: response.data });
+      })
+      .catch(error => {
+        if (error.response) {
+          dispatch(authError(error.response.data));
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+      });
   };
 }
