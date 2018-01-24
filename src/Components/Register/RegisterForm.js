@@ -1,10 +1,33 @@
 import React, { Component } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { OPEN_LOGIN } from '../../Actions';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { Field as FieldBloomer, Control, Button, Notification } from 'bloomer';
 import BloomerField from '../Login/BloomerField';
 import './Register.css';
+
+const validate = values => {
+  const errors = {};
+
+  if (!values.username) {
+    errors.username = 'Please choose an username';
+  } else if (values.username.length > 15) {
+    errors.username = 'Must be 15 characters or less';
+  }
+  if (!values.email) {
+    errors.email = 'We need your e-mail!';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+
+  if (!values.password) {
+    errors.password = 'Please create a password';
+  } else if (values.password.length > 15) {
+    errors.password = 'Must be 15 characters or less';
+  }
+
+  return errors;
+};
 
 class RegisterForm extends Component {
   renderError() {
@@ -18,45 +41,48 @@ class RegisterForm extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         {/* If there's an error it will show up here */}
 
         {this.renderError()}
 
-        <BloomerField
-          component="input"
-          name="name"
+        <Field
+          name="username"
           type="text"
-          heading="Pick a username"
+          component={BloomerField}
+          heading="Username"
           icon="fa fa-user"
-          className="input"
         />
 
-        <BloomerField
-          component="input"
+        <Field
           name="email"
           type="email"
+          component={BloomerField}
           heading="Your e-mail"
           icon="fa fa-at"
-          className="input"
         />
 
-        <BloomerField
-          component="input"
+        <Field
           name="password"
           type="password"
+          component={BloomerField}
           heading="Create a password"
           icon="fa fa-key"
-          className="input"
         />
 
         <br />
 
         <FieldBloomer>
           <Control>
-            <Button type="submit" isColor="warning" isOutlined isFullWidth>
+            <Button
+              type="submit"
+              disabled={submitting}
+              isColor="warning"
+              isOutlined
+              isFullWidth
+            >
               Sign Up
             </Button>
           </Control>
@@ -82,5 +108,6 @@ class RegisterForm extends Component {
 }
 
 export default reduxForm({
-  form: 'register'
+  form: 'register',
+  validate
 })(RegisterForm);
