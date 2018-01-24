@@ -10,7 +10,7 @@ import {
   Image
 } from 'bloomer';
 
-import * as actions from '../../Actions';
+import * as actions from '../../Actions/Auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
