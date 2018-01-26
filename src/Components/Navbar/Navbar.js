@@ -17,7 +17,6 @@ import Login from '../Login/Login';
 class Nav extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       isMenuOpen: false
     };
@@ -88,7 +87,7 @@ class Nav extends Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    user: state.auth.user,
+    user: state.user.user,
     isLoginActive: state.ui.isLoginActive
   };
 }
