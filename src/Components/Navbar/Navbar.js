@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from '../../Actions/User';
 
 import {
   Navbar,
@@ -23,6 +24,17 @@ class Nav extends Component {
     this.burgerClick = this.burgerClick.bind(this);
   }
 
+  componentWillMount() {
+    console.log(this.props.authenticated);
+    /* Avoids fetching the user everythime this component gets rendered */
+    if (
+      typeof this.props.authenticated !== 'undefined' &&
+      typeof this.props.user === 'undefined'
+    ) {
+      this.props.getUser();
+    }
+  }
+
   links() {
     let loggedin;
     if (typeof this.props.user === 'undefined') {
@@ -34,13 +46,13 @@ class Nav extends Component {
     if (this.props.authenticated) {
       return (
         <NavbarEnd>
-          <NavbarItem isHoverable>
+          <NavbarItem>
             <NavLink to="/menu/dashboard">Menu</NavLink>
           </NavbarItem>
           <NavbarItem hasDropdown isHoverable>
             <NavbarLink> {loggedin} </NavbarLink>
             <NavbarDropdown isHidden="mobile" isBoxed>
-              <NavbarItem hasTextColor="dark">
+              <NavbarItem>
                 <NavLink to="/signout">Log Out</NavLink>
               </NavbarItem>
             </NavbarDropdown>
@@ -72,13 +84,13 @@ class Nav extends Component {
 
   render() {
     return (
-      <Navbar isTransparent>
+      <Navbar className="is-warning has-shadow">
         <Brand
           isMenuOpen={this.state.isMenuOpen}
           callbackParent={newState => this.burgerClick(newState)}
         />
         {/* Injecting links */}
-        <NavbarMenu isActive={this.state.isActive}> {this.links()} </NavbarMenu>
+        <NavbarMenu isActive={this.state.isActive}>{this.links()}</NavbarMenu>
       </Navbar>
     );
   }
@@ -92,4 +104,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps, actions)(Nav);

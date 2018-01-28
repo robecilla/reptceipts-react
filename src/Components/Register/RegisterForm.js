@@ -74,34 +74,29 @@ class RegisterForm extends Component {
 
         <br />
 
-        <FieldBloomer>
-          <Control>
-            <Button
-              type="submit"
-              disabled={submitting}
-              isColor="warning"
-              isOutlined
-              isFullWidth
-            >
-              Sign Up
-            </Button>
-          </Control>
-        </FieldBloomer>
-        <FieldBloomer>
-          <Control>
-            <Button
-              isColor="dark"
-              isFullWidth
-              onClick={() =>
-                this.props.dispatch({
-                  type: OPEN_LOGIN
-                })
-              }
-            >
-              .. or Log In
-            </Button>
-          </Control>
-        </FieldBloomer>
+        <Control>
+          <Button
+            type="submit"
+            disabled={submitting}
+            isColor="warning"
+            isPulled="left"
+          >
+            Sign Up
+          </Button>
+        </Control>
+        <Control>
+          <Button
+            isColor="dark"
+            isPulled="right"
+            onClick={() =>
+              this.props.dispatch({
+                type: OPEN_LOGIN
+              })
+            }
+          >
+            Log In
+          </Button>
+        </Control>
       </form>
     );
   }

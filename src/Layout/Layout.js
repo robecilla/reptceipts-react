@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Hero, HeroHeader } from 'bloomer';
+import { Container } from 'bloomer';
 
 import Navbar from '../Components/Navbar/Navbar';
 import Main from '../Components/Main/Main';
@@ -7,14 +7,9 @@ import Main from '../Components/Main/Main';
 class Layout extends Component {
   render() {
     return (
-      <div>
-        <Hero isColor="dark" isFullHeight>
-          <HeroHeader>
-            <Navbar />
-          </HeroHeader>
-
-          <Main />
-        </Hero>
+      <div className="is-fullheight">
+        <Navbar />
+        <Main />
       </div>
     );
   }

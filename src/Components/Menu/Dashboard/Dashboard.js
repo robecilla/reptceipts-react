@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../Actions/User';
 
 // Components
-import { Title } from 'bloomer';
+import { Title, Column, Box } from 'bloomer';
 
 class Dashboard extends Component {
   /* This gets called before rendering */
@@ -21,17 +21,15 @@ class Dashboard extends Component {
     }
 
     return (
-      <div>
-        <Title hasTextColor="dark" isSize={3}>
-          Welcome {this.props.user.name}
-        </Title>
-        <div className="is-flex">
-          <label style={{ padding: '0px 15px 0px 0px' }}>
-            <strong>Your name: </strong>
-          </label>
-          <div>{this.props.user.name}</div>
-        </div>
-      </div>
+      <Column
+        isSize={{ desktop: 10 }}
+        className="hero is-fullheight"
+        style={{ padding: '40px 20px' }}
+      >
+        <Box>
+          <Title isSize={3}>Welcome {this.props.user.name}</Title>
+        </Box>
+      </Column>
     );
   }
 }

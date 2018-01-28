@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 // Components
-import {
-  HeroBody,
-  Title,
-  Subtitle,
-  Container,
-  Columns,
-  Column,
-  Image
-} from 'bloomer';
+import { Title, Subtitle, HeroBody, Columns, Column, Image } from 'bloomer';
 
 import * as actions from '../../Actions/Auth';
 import { connect } from 'react-redux';
@@ -18,7 +10,7 @@ import RegisterForm from '../Register/RegisterForm';
 import s8 from '../../Assets/img/s8-render.png';
 
 const s8position = {
-  width: '70%'
+  width: '30%'
 };
 
 class Register extends Component {
@@ -56,41 +48,38 @@ class Register extends Component {
       );
     } else {
       return (
-        <HeroBody style={{ alignItems: 'initial' }}>
-          <Container>
-            <Columns isMultiline>
-              <Column
-                isSize={{ mobile: 'full', desktop: 'full' }}
-                isOffset={{ desktop: 2 }}
-              >
-                <Title isSize={3}>Keep your purchase receipts organised</Title>
-                <Subtitle isSize={6} style={{ marginTop: '10px' }}>
-                  {' '}
-                  reptceipts helps you organise, manage and redeem your purchase
-                  receipts{' '}
-                </Subtitle>
-              </Column>
-              <Column
-                isSize={{ mobile: 'full', desktop: 6, widescreen: 4 }}
-                isOffset={{ desktop: 2 }}
-              >
-                <RegisterForm
-                  onSubmit={this.handleSubmit}
-                  errorMessage={this.props.errorMessage}
-                />
-              </Column>
-            </Columns>
-          </Container>
-          <Container>
-            <Columns>
-              <Column
-                isSize={{ mobile: 'full', desktop: 9 }}
-                isOffset={{ mobile: 3, desktop: 3 }}
-              >
-                <Image src={s8} style={s8position} />
-              </Column>
-            </Columns>
-          </Container>
+        <HeroBody>
+          <Columns>
+            <Column
+              isSize={{ mobile: 'full', desktop: 7 }}
+              isOffset={{ desktop: 1 }}
+            >
+              <Title isSize={3}>Keep your purchase receipts organised</Title>
+              <Subtitle isSize={6} style={{ marginTop: '10px' }}>
+                {' '}
+                reptceipts helps you organise, manage and redeem your purchase
+                receipts{' '}
+              </Subtitle>
+            </Column>
+          </Columns>
+          <Columns>
+            <Column
+              isSize={{ mobile: 'full', desktop: 3 }}
+              isOffset={{ desktop: 1 }}
+            >
+              <RegisterForm
+                onSubmit={this.handleSubmit}
+                errorMessage={this.props.errorMessage}
+              />
+            </Column>
+            <Column
+              isSize={{ mobile: 'hidden', desktop: 5 }}
+              isOffset={{ desktop: 3 }}
+              style={s8position}
+            >
+              <Image src={s8} style={{ bottom: '3em' }} />
+            </Column>
+          </Columns>
         </HeroBody>
       );
     }
