@@ -1,14 +1,5 @@
 import React, { Component } from 'react';
-import { Field } from 'redux-form';
-import {
-  Field as FieldBloomer,
-  Label,
-  Control,
-  Icon,
-  Heading,
-  Input,
-  Help
-} from 'bloomer';
+import { Field, Label, Control, Icon, Heading, Input, Help } from 'bloomer';
 
 class BloomerField extends Component {
   render() {
@@ -25,7 +16,7 @@ class BloomerField extends Component {
     let errClass = touched && error ? 'danger' : '';
 
     return (
-      <FieldBloomer>
+      <Field>
         {tag}
         <Control hasIcons="left">
           <Input {...input} type={type} isColor={errClass} />
@@ -34,7 +25,7 @@ class BloomerField extends Component {
           </Icon>
           {touched && (error && <Help isColor="danger">{error}</Help>)}
         </Control>
-      </FieldBloomer>
+      </Field>
     );
   }
 }

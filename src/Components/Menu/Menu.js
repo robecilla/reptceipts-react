@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
-import {
-  Menu,
-  MenuLabel,
-  MenuList,
-  Columns,
-  Column,
-  HeroBody,
-  Container
-} from 'bloomer';
+import { Menu, MenuList, Columns, Column } from 'bloomer';
 import Dashboard from './Dashboard/Dashboard';
 import Receipts from './Receipts/Receipts';
 
@@ -25,11 +17,11 @@ class MenuBar extends Component {
               backgroundColor: '#F9F9F9',
               borderRight: '1px solid #DEDEDE'
             }}
-            isSize={{ desktop: 2 }}
+            isSize={{ tablet: 2, desktop: 2, default: 2 }}
             isHidden="mobile"
             className="hero is-fullheight"
           >
-            <Menu>
+            <Menu hasTextAlign="centered">
               <br />
               <MenuList style={{ padding: '40px' }}>
                 <li>

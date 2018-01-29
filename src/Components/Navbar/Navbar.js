@@ -25,7 +25,6 @@ class Nav extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.authenticated);
     /* Avoids fetching the user everythime this component gets rendered */
     if (
       typeof this.props.authenticated !== 'undefined' &&

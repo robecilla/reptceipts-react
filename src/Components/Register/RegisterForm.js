@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { OPEN_LOGIN } from '../../Actions';
 // import { connect } from 'react-redux';
-import { Field as FieldBloomer, Control, Button, Notification } from 'bloomer';
+import { Control, Button, Notification } from 'bloomer';
 import BloomerField from '../Login/BloomerField';
 import './Register.css';
 
