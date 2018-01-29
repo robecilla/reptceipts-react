@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Switch, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../../Actions/User';
 
@@ -9,15 +10,16 @@ class Dashboard extends Component {
   /* This gets called before rendering */
   componentWillMount() {
     /* Avoids fetching the user everythime this component gets rendered */
-    if (typeof this.props.user === 'undefined') {
-      //this.props.getUser();
+    if (typeof this.props.receipts === 'undefined') {
+      this.props.getUserReceipts();
     }
   }
 
   render() {
+    const receipts = this.props.receipts;
     /* Waits until user data gets fetched from API */
-    if (typeof this.props.user === 'undefined') {
-      //return <h2>Loading...</h2>;
+    if (typeof receipts === 'undefined') {
+      return <h2>Loading...</h2>;
     }
 
     return (
@@ -31,26 +33,16 @@ class Dashboard extends Component {
           cursor: 'pointer'
         }}
       >
-        <Receipt
-          location="Sainsburys"
-          subtotal="£50.45"
-          date="27/01/2018"
-          time="11.50 am"
-        />
-
-        <Receipt
-          location="New Look"
-          subtotal="£30.95"
-          date="04/01/2018"
-          time="10.50 am"
-        />
-
-        <Receipt
-          location="Vital Ingredient"
-          subtotal="£5.45"
-          date="23/01/2018"
-          time="13.50 am"
-        />
+        {/* Loops through user receipts and render */
+        receipts.map(receipt => (
+          <NavLink key={receipt.id} to={'/menu/receipts/' + receipt.id}>
+            <Receipt
+              location={receipt.location}
+              subtotal={receipt.subtotal}
+              datetime={receipt.created_at}
+            />
+          </NavLink>
+        ))}
       </Column>
     );
   }
@@ -58,7 +50,8 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user.user
+    user: state.user.user,
+    receipts: state.user.receipts
   };
 }
 

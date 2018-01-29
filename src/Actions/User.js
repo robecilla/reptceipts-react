@@ -1,5 +1,6 @@
 import axios from 'axios';
 export const SET_USER = 'set_user';
+export const GET_USER_RECEIPTS = 'get_user_receitps';
 const ROOT_URL = 'https://reptceipts.com';
 
 export function getUser() {
@@ -40,12 +41,12 @@ export function getUserReceipts() {
       'Bearer ' + localStorage.getItem('token');
     axios({
       method: 'GET',
-      url: `${ROOT_URL}/api/user`
+      url: `${ROOT_URL}/api/receipt`
     })
       .then(response => {
         dispatch({
-          type: SET_USER,
-          payload: response.data.user
+          type: GET_USER_RECEIPTS,
+          payload: response.data
         });
       })
       .catch(error => {
