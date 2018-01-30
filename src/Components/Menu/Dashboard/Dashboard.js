@@ -27,7 +27,7 @@ class Dashboard extends Component {
         style={{ padding: '40px 20px' }}
       >
         <Box>
-          <Title isSize={3}>Welcome {this.props.user.name}</Title>
+          <Title isSize={3}>Welcome {this.props.user.username}</Title>
         </Box>
       </Column>
     );
