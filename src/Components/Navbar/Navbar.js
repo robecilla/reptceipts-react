@@ -39,7 +39,7 @@ class Nav extends Component {
     if (typeof this.props.user === 'undefined') {
       loggedin = 'Loading...';
     } else {
-      loggedin = this.props.user.name;
+      loggedin = this.props.user.username;
     }
 
     if (this.props.authenticated) {
