@@ -1,1 +1,1 @@
-export const OPEN_LOGIN = 'open_login';
+export const OPEN_LOGIN = 'OPEN_LOGIN';

@@ -1,6 +1,6 @@
 import axios from 'axios';
-export const SET_USER = 'set_user';
-export const GET_USER_RECEIPTS = 'get_user_receitps';
+export const SET_USER = 'SET_USER';
+export const GET_USER_RECEIPTS = 'GET_USER_RECEIPTS';
 const ROOT_URL = 'https://reptceipts.com';
 
 export function getUser() {
