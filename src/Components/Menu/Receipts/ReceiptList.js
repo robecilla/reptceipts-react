@@ -3,10 +3,10 @@ import { Switch, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../../Actions/User';
 
-import { Column } from 'bloomer';
-import Receipt from './Receipt';
+import { Container, Column } from 'bloomer';
+import ReceiptCard from './ReceiptCard';
 
-class Dashboard extends Component {
+class ReceiptList extends Component {
   /* This gets called before rendering */
   componentWillMount() {
     /* Avoids fetching the user everythime this component gets rendered */
@@ -23,27 +23,27 @@ class Dashboard extends Component {
     }
 
     return (
-      <Column
-        isSize={{ desktop: 4 }}
-        className="is-fullheight"
-        style={{
-          padding: '40px 20px',
-          display: 'block',
-          borderRight: '1px solid #DEDEDE',
-          cursor: 'pointer'
-        }}
-      >
-        {/* Loops through user receipts and render */
-        receipts.map(receipt => (
-          <NavLink key={receipt.id} to={'/menu/receipts/' + receipt.id}>
-            <Receipt
+      <div>
+        <Column
+          className="is-fullheight"
+          style={{
+            padding: '40px 20px',
+            display: 'block',
+            borderRight: '1px solid #DEDEDE'
+          }}
+        >
+          {/* Loops through user receipts and render */
+          receipts.map(receipt => (
+            <ReceiptCard
+              key={receipt.id}
+              id={receipt.id}
               location={receipt.location}
               subtotal={receipt.subtotal}
               datetime={receipt.created_at}
             />
-          </NavLink>
-        ))}
-      </Column>
+          ))}
+        </Column>
+      </div>
     );
   }
 }
@@ -55,4 +55,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(Dashboard);
+export default connect(mapStateToProps, actions)(ReceiptList);

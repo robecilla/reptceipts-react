@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import { Menu, MenuList, Columns, Column } from 'bloomer';
 import Dashboard from './Dashboard/Dashboard';
-import Receipts from './Receipts/Receipts';
+import ReceiptList from './Receipts/ReceiptList';
+import Receipt from './Receipts/Receipt';
 
 import './Menu.css';
 
@@ -41,8 +42,9 @@ class MenuBar extends Component {
           </Column>
           <Switch>
             <Route path="/menu/dashboard" component={Dashboard} />
-            <Route path="/menu/receipts" component={Receipts} />
+            <Route path="/menu/receipts" component={ReceiptList} />
           </Switch>
+          <Route path="/menu/receipts/:id" component={Receipt} />
         </Columns>
       </div>
     );
