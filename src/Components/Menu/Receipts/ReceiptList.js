@@ -24,6 +24,8 @@ class ReceiptList extends Component {
 
   render() {
     const receipts = this.props.receipts;
+    console.log(receipts);
+
     /* Waits until user data gets fetched from API */
     if (!receipts) {
       return (
@@ -74,8 +76,9 @@ class ReceiptList extends Component {
             <ReceiptCard
               key={receipt.id}
               id={receipt.id}
-              location={receipt.location}
+              retailer_name={receipt.retailer}
               subtotal={receipt.subtotal}
+              payment_method={receipt.payment_method}
               datetime={receipt.created_at}
             />
           ))}
