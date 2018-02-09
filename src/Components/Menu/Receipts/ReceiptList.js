@@ -24,66 +24,62 @@ class ReceiptList extends Component {
 
   render() {
     const receipts = this.props.receipts;
-    console.log(receipts);
-
+    console.log(typeof receipts);
     /* Waits until user data gets fetched from API */
     if (!receipts) {
       return (
-        <div>
-          <Column
-            className="is-fullheight"
-            style={{
-              padding: '40px 20px',
-              display: 'block'
-            }}
-          >
-            <Title>Loading...</Title>
-          </Column>
-        </div>
+        <Column
+          className="is-fullheight"
+          isSize={{ desktop: 4 }}
+          style={{
+            padding: '40px 20px',
+            display: 'block'
+          }}
+        >
+          <Title>Loading...</Title>
+        </Column>
       );
     }
 
     if (isEmpty(receipts)) {
       return (
-        <div>
-          <Column
-            className="is-fullheight"
-            style={{
-              padding: '40px 20px',
-              display: 'block'
-            }}
-          >
-            <Title>
-              Sorry, you appear to not have any receipt! Download the app!
-            </Title>
-          </Column>
-        </div>
+        <Column
+          className="is-fullheight"
+          isSize={{ desktop: 4 }}
+          style={{
+            padding: '40px 20px',
+            display: 'block'
+          }}
+        >
+          <Title>
+            Sorry, you appear to not have any receipt! Download the app!
+          </Title>
+        </Column>
       );
     }
 
     return (
-      <div>
-        <Column
-          className="is-fullheight"
-          style={{
-            padding: '40px 20px',
-            display: 'block',
-            borderRight: '1px solid #DEDEDE'
-          }}
-        >
-          {/* Loops through user receipts and render */
-          receipts.map(receipt => (
-            <ReceiptCard
-              key={receipt.id}
-              id={receipt.id}
-              retailer_name={receipt.retailer}
-              subtotal={receipt.subtotal}
-              payment_method={receipt.payment_method}
-              datetime={receipt.created_at}
-            />
-          ))}
-        </Column>
-      </div>
+      <Column
+        className="is-fullheight"
+        isSize={{ desktop: 4 }}
+        style={{
+          padding: '40px 20px',
+          display: 'block',
+          borderRight: '1px solid #DEDEDE'
+        }}
+      >
+        {/* Loops through user receipts and render */
+        receipts.map(receipt => (
+          <ReceiptCard
+            key={receipt.id}
+            id={receipt.id}
+            retailer_name={receipt.retailer_name}
+            subtotal={receipt.subtotal}
+            payment_method={receipt.payment_method}
+            datetime={receipt.created_at}
+          />
+        ))}
+      </Column>
     );
   }
 }
