@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const GET_RECEIPT_DETAIL = 'GET_RECEIPT_DETAIL';
-const ROOT_URL = 'https://reptceipts.com';
+const ROOT_URL = 'reptceipts.com';
 
 export function getReceiptDetail(id) {
   return function(dispatch) {

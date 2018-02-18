@@ -5,7 +5,7 @@ export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const FETCH_MESSAGE = 'FETCH_MESSAGE';
 
-const ROOT_URL = 'https://reptceipts.com';
+const ROOT_URL = 'reptceipts.com';
 
 /* Login */
 export function signinUser(values, history) {

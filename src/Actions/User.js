@@ -1,7 +1,7 @@
 import axios from 'axios';
 export const SET_USER = 'SET_USER';
 export const GET_USER_RECEIPTS = 'GET_USER_RECEIPTS';
-const ROOT_URL = 'https://reptceipts.com';
+const ROOT_URL = 'reptceipts.com';
 
 export function getUser() {
   return function(dispatch) {
