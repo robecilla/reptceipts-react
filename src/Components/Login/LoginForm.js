@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { CLOSE_LOGIN } from '../../Actions';
 // import { connect } from 'react-redux';
-import { Field as FieldBloomer, Control, Button, Notification } from 'bloomer';
+import {
+  Field as FieldBloomer,
+  Control,
+  Button,
+  Notification,
+  Delete
+} from 'bloomer';
 
 import BloomerField from './BloomerField';
 
@@ -38,6 +45,14 @@ class LoginForm extends Component {
     const { handleSubmit } = this.props;
     return (
       <div>
+        <Delete
+          isPulled="right"
+          onClick={() =>
+            this.props.dispatch({
+              type: CLOSE_LOGIN
+            })
+          }
+        />
         <form onSubmit={handleSubmit}>
           {/* If there's an error it will show up here */}
 

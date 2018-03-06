@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Columns, Column } from 'bloomer';
+import { Container, Columns, Column, Delete } from 'bloomer';
 import * as actions from '../../Actions/Auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
