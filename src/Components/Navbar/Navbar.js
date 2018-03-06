@@ -67,7 +67,7 @@ class Nav extends Component {
             isActive={this.props.isLoginActive}
           >
             <NavbarLink>Login</NavbarLink>
-            <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed>
+            <NavbarDropdown className={'is-right'} isBoxed>
               <Login />
             </NavbarDropdown>
           </NavbarItem>

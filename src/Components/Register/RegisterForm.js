@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { OPEN_LOGIN } from '../../Actions';
+import { TOGGLE_LOGIN } from '../../Actions';
 // import { connect } from 'react-redux';
 import { Control, Button, Notification } from 'bloomer';
 import BloomerField from '../Login/BloomerField';
@@ -90,7 +90,8 @@ class RegisterForm extends Component {
             isPulled="right"
             onClick={() =>
               this.props.dispatch({
-                type: OPEN_LOGIN
+                type: TOGGLE_LOGIN,
+                isLoginActive: true
               })
             }
           >

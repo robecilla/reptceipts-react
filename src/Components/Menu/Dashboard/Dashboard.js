@@ -17,7 +17,19 @@ class Dashboard extends Component {
   render() {
     /* Waits until user data gets fetched from API */
     if (typeof this.props.user === 'undefined') {
-      return <h2>Loading...</h2>;
+      return (
+        <div>
+          <Column
+            className="is-fullheight"
+            style={{
+              padding: '40px 20px',
+              display: 'block'
+            }}
+          >
+            <Title>Loading...</Title>
+          </Column>
+        </div>
+      );
     }
 
     return (

@@ -24,7 +24,6 @@ class ReceiptList extends Component {
 
   render() {
     const receipts = this.props.receipts;
-    console.log(typeof receipts);
     /* Waits until user data gets fetched from API */
     if (!receipts) {
       return (

@@ -23,7 +23,7 @@ class Receipt extends Component {
 
   render() {
     // const items = receiptDetail.items.JSON.parse();
-    /* Waits until user data gets fetched from API */
+    /* Waits until receipt detail data gets fetched from API */
     if (!this.props.receiptDetail) {
       return (
         <div>
