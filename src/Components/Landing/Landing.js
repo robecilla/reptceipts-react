@@ -7,11 +7,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import RegisterForm from '../Register/RegisterForm';
-import s8 from '../../Assets/img/s8-render.png';
-
-const s8position = {
-  width: '30%'
-};
 
 class Register extends Component {
   static contextTypes = {
@@ -64,20 +59,13 @@ class Register extends Component {
           </Columns>
           <Columns>
             <Column
-              isSize={{ mobile: 'full', desktop: 3 }}
+              isSize={{ mobile: 'full', tablet: 5, desktop: 3 }}
               isOffset={{ desktop: 1 }}
             >
               <RegisterForm
                 onSubmit={this.handleSubmit}
                 errorMessage={this.props.errorMessage}
               />
-            </Column>
-            <Column
-              isSize={{ mobile: 'hidden', desktop: 5 }}
-              isOffset={{ desktop: 3 }}
-              style={s8position}
-            >
-              <Image src={s8} style={{ bottom: '3em' }} />
             </Column>
           </Columns>
         </HeroBody>
@@ -89,7 +77,8 @@ class Register extends Component {
 function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error,
-    ui: state.ui
+    ui: state.ui,
+    authenticated: state.auth.authenticated
   };
 }
 
