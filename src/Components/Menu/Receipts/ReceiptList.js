@@ -44,15 +44,14 @@ class ReceiptList extends Component {
       return (
         <Column
           className="is-fullheight"
-          isSize={{ desktop: 4 }}
+          hasTextAlign="centered"
           style={{
             padding: '40px 20px',
             display: 'block'
           }}
         >
-          <Title>
-            Sorry, you appear to not have any receipt! Download the app!
-          </Title>
+          <Title>Sorry, you appear to not have any receipt!</Title>
+          <Title>Download the app!</Title>
         </Column>
       );
     }

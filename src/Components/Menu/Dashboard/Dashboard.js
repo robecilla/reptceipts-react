@@ -38,9 +38,7 @@ class Dashboard extends Component {
         className="hero is-fullheight"
         style={{ padding: '40px 20px' }}
       >
-        <Box>
-          <Title isSize={3}>Welcome {this.props.user.username}</Title>
-        </Box>
+        <Title isSize={3}>Welcome {this.props.user.username}</Title>
       </Column>
     );
   }

@@ -31,12 +31,6 @@ class MenuBar extends Component {
                 <li>
                   <NavLink to="/menu/receipts">Receipts</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/menu/profile">Profile</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/menu/settings">Settings</NavLink>
-                </li>
               </MenuList>
             </Menu>
           </Column>
