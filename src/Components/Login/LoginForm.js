@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { CLOSE_LOGIN } from '../../Actions';
+import { TOGGLE_LOGIN } from '../../Actions';
 // import { connect } from 'react-redux';
 import {
   Field as FieldBloomer,
@@ -49,7 +49,8 @@ class LoginForm extends Component {
           isPulled="right"
           onClick={() =>
             this.props.dispatch({
-              type: CLOSE_LOGIN
+              type: TOGGLE_LOGIN,
+              isLoginActive: false
             })
           }
         />
