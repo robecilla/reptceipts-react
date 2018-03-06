@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/User';
 
@@ -61,6 +62,11 @@ class Nav extends Component {
     } else {
       return (
         <NavbarEnd>
+          <NavbarItem>
+            <Link smooth to="#howitworks">
+              How It Works
+            </Link>
+          </NavbarItem>
           <NavbarItem
             hasDropdown
             isHoverable
