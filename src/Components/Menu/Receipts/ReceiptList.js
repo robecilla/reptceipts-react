@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../../../Actions/User';
+import * as userActions from '../../../Actions/User';
 
-import { Container, Column, Title } from 'bloomer';
+import { Container, Column, Title, Delete, Button } from 'bloomer';
 import ReceiptCard from './ReceiptCard';
 
 function isEmpty(obj) {
@@ -73,8 +73,7 @@ class ReceiptList extends Component {
             id={receipt.id}
             retailer_name={receipt.retailer_name}
             subtotal={receipt.subtotal}
-            payment_method={receipt.payment_method}
-            datetime={receipt.created_at}
+            callBack={() => this.props.getUserReceipts()}
           />
         ))}
       </Column>
@@ -89,4 +88,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(ReceiptList);
+export default connect(mapStateToProps, userActions)(ReceiptList);

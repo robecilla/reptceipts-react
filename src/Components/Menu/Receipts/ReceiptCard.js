@@ -1,35 +1,93 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
-// import * as actions from '../../../Actions/User';
+import { connect } from 'react-redux';
+import * as receiptActions from '../../../Actions/Receipt';
 
-import { Card, CardContent, Content, Title, Subtitle } from 'bloomer';
+import {
+  Content,
+  Title,
+  Subtitle,
+  Heading,
+  Box,
+  Delete,
+  Modal,
+  ModalBackground,
+  ModalContent
+} from 'bloomer';
+import ReceiptCardStyle from './box.css';
+import { Button } from 'bloomer/lib/elements/Button';
 
 class ReceiptCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isModalActive: false
+    };
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete(id) {
+    this.setState({ isModalActive: false });
+    this.props.deleteReceipt(id);
+    this.props.callBack();
+  }
+
   render() {
-    const {
-      id,
-      retailer_name,
-      subtotal,
-      payment_method,
-      datetime
-    } = this.props;
+    const { id, retailer_name, subtotal } = this.props;
     return (
-      <Link to={'/menu/receipts/' + id}>
-        <Card>
-          <CardContent>
+      <div>
+        <Box
+          style={{ padding: '12px', marginBottom: '10px' }}
+          className="receipt-box"
+        >
+          <Link to={'/menu/receipts/' + id}>
             <Content>
-              <Title isSize={4}>{retailer_name}</Title>
-              <Subtitle isSize={6}>Subtotal: £{subtotal}</Subtitle>
-              <small>When: {datetime}</small>
-              <br />
-              <small>Payment Method: {payment_method}</small>
+              <Title isMarginless isSize={4}>
+                {retailer_name}
+              </Title>
+              <Heading style={{ width: '40%' }}>Subtotal: £{subtotal}</Heading>
             </Content>
-          </CardContent>
-        </Card>
-      </Link>
+          </Link>
+          <Delete
+            isPulled="right"
+            onClick={() => this.setState({ isModalActive: true })}
+          />
+        </Box>
+        <Modal isActive={this.state.isModalActive}>
+          <ModalBackground />
+          <ModalContent>
+            <Box>
+              <Content hasTextAlign="centered">
+                <Subtitle>
+                  Are you sure you want to delete this receipt?
+                </Subtitle>
+                <Button
+                  isColor="warning"
+                  isPulled="left"
+                  onClick={() => this.handleDelete(id)}
+                >
+                  Yes
+                </Button>
+                <Button
+                  isColor="dark"
+                  isPulled="right"
+                  onClick={() => this.setState({ isModalActive: false })}
+                >
+                  No
+                </Button>
+              </Content>
+            </Box>
+          </ModalContent>
+        </Modal>
+      </div>
     );
   }
 }
 
-export default ReceiptCard;
+function mapStateToProps(state) {
+  return {
+    receipts: state.user.receipts
+  };
+}
+
+export default connect(mapStateToProps, receiptActions)(ReceiptCard);
