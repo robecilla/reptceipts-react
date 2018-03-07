@@ -72,7 +72,12 @@ class Receipt extends Component {
               <div>{retailer.email}</div>
             </Content>
             <hr />
-            <Content hasTextAlign="centered">
+            <Content>
+              <small>When: {receipt.created_at}</small>
+              <br />
+              <small>Payment Method: {receipt.payment_method}</small>
+              <br />
+              <br />
               <Table isNarrow>
                 <thead>
                   <tr>
@@ -101,13 +106,13 @@ class Receipt extends Component {
                   </tr>
                   <tr>
                     <td colSpan="2" />
-                    <td>VAT (21%):</td>
+                    <td>VAT ({receipt.VAT}%):</td>
                     <td>15.69</td>
                   </tr>
                   <tr>
                     <td colSpan="2" />
                     <td>Subtotal:</td>
-                    <td>620.25</td>
+                    <td>{receipt.subtotal}</td>
                   </tr>
                 </tfoot>
               </Table>
