@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as userActions from '../../../Actions/User';
+import SearchInput, { createFilter } from 'react-search-input';
 
-import { Container, Column, Title, Delete, Button } from 'bloomer';
+import { Container, Column, Title, Subtitle } from 'bloomer';
 import ReceiptCard from './ReceiptCard';
 
 function isEmpty(obj) {
@@ -13,9 +14,23 @@ function isEmpty(obj) {
   return true;
 }
 
+const KEYS_TO_FILTERS = ['retailer_name', 'subtotal'];
+
 class ReceiptList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: ''
+    };
+    this.searchUpdated = this.searchUpdated.bind(this);
+  }
+
+  searchUpdated(term) {
+    this.setState({ searchTerm: term });
+  }
+
   /* This gets called before rendering */
-  componentWillMount() {
+  componentDidMount() {
     /* Avoids fetching the user everythime this component gets rendered */
     if (typeof this.props.receipts === 'undefined') {
       this.props.getUserReceipts();
@@ -56,6 +71,13 @@ class ReceiptList extends Component {
       );
     }
 
+    let filteredReceipts = [];
+    if (receipts) {
+      filteredReceipts = receipts.filter(
+        createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
+      );
+    }
+
     return (
       <Column
         className="is-fullheight"
@@ -63,19 +85,27 @@ class ReceiptList extends Component {
         style={{
           padding: '40px 20px',
           display: 'block',
-          borderRight: '1px solid #DEDEDE'
+          borderRight: '1px solid #DEDEDE',
+          overflowY: 'scroll',
+          height: '100vh'
         }}
       >
+        <SearchInput inputClassName="input" onChange={this.searchUpdated} />
+        <br />
         {/* Loops through user receipts and render */
-        receipts.map(receipt => (
-          <ReceiptCard
-            key={receipt.id}
-            id={receipt.id}
-            retailer_name={receipt.retailer_name}
-            subtotal={receipt.subtotal}
-            callBack={() => this.props.getUserReceipts()}
-          />
-        ))}
+        !isEmpty(filteredReceipts) ? (
+          filteredReceipts.map(receipt => (
+            <ReceiptCard
+              key={receipt.id}
+              id={receipt.id}
+              retailer_name={receipt.retailer_name}
+              subtotal={receipt.subtotal}
+              callBack={() => this.props.getUserReceipts()}
+            />
+          ))
+        ) : (
+          <Subtitle isSize={6}>Could not find that receipt!</Subtitle>
+        )}
       </Column>
     );
   }

@@ -61,16 +61,11 @@ class ReceiptCard extends Component {
                 <Subtitle>
                   Are you sure you want to delete this receipt?
                 </Subtitle>
-                <Button
-                  isColor="warning"
-                  isPulled="left"
-                  onClick={() => this.handleDelete(id)}
-                >
+                <Button isColor="warning" onClick={() => this.handleDelete(id)}>
                   Yes
                 </Button>
                 <Button
                   isColor="dark"
-                  isPulled="right"
                   onClick={() => this.setState({ isModalActive: false })}
                 >
                   No
