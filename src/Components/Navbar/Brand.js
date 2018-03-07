@@ -23,7 +23,17 @@ class Brand extends Component {
       <NavbarBrand>
         <NavbarItem>
           <img src={brand} alt="Brand" />
-          <NavLink to="/">reptceipts</NavLink>
+          <NavLink to="/">
+            <span
+              style={{
+                fontFamily: 'Ubuntu, sans-serif',
+                fontSize: '30px',
+                color: '#363636'
+              }}
+            >
+              reptceipts
+            </span>
+          </NavLink>
         </NavbarItem>
         <NavbarBurger
           isActive={this.state.isActiveBurger}

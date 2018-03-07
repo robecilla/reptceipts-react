@@ -10,7 +10,8 @@ import {
   NavbarMenu,
   NavbarLink,
   NavbarDropdown,
-  NavbarEnd
+  NavbarEnd,
+  Icon
 } from 'bloomer';
 
 import Brand from './Brand';
@@ -46,14 +47,16 @@ class Nav extends Component {
     if (this.props.authenticated) {
       return (
         <NavbarEnd>
-          <NavbarItem>
-            <NavLink to="/menu/dashboard">Menu</NavLink>
-          </NavbarItem>
           <NavbarItem hasDropdown isHoverable>
-            <NavbarLink> {loggedin} </NavbarLink>
+            <NavbarLink>
+              {' '}
+              <i className="fas fa-user-circle" />&nbsp;&nbsp; {loggedin}{' '}
+            </NavbarLink>
             <NavbarDropdown isHidden="mobile" isBoxed>
               <NavbarItem>
-                <NavLink to="/signout">Log Out</NavLink>
+                <NavLink to="/signout">
+                  <i className="fas fa-sign-out-alt" />&nbsp;&nbsp;Log Out
+                </NavLink>
               </NavbarItem>
             </NavbarDropdown>
           </NavbarItem>
@@ -64,7 +67,7 @@ class Nav extends Component {
         <NavbarEnd>
           <NavbarItem>
             <Link smooth to="#howitworks">
-              How It Works
+              <i class="fas fa-book" />&nbsp;&nbsp;How It Works
             </Link>
           </NavbarItem>
           <NavbarItem
@@ -72,7 +75,9 @@ class Nav extends Component {
             isHoverable
             isActive={this.props.isLoginActive}
           >
-            <NavbarLink>Login</NavbarLink>
+            <NavbarLink>
+              <i className="fas fa-sign-in-alt" />&nbsp;&nbsp;Login
+            </NavbarLink>
             <NavbarDropdown className={'is-right'} isBoxed>
               <Login />
             </NavbarDropdown>
