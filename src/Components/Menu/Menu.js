@@ -4,6 +4,7 @@ import { Menu, MenuList, Columns, Column } from 'bloomer';
 import Dashboard from './Dashboard/Dashboard';
 import ReceiptList from './Receipts/ReceiptList';
 import Receipt from './Receipts/Receipt';
+import QRExamples from './Receipts/QRExamples/QRExamples';
 
 import './Menu.css';
 
@@ -31,12 +32,17 @@ class MenuBar extends Component {
                 <li>
                   <NavLink to="/menu/receipts">Receipts</NavLink>
                 </li>
+                <hr />
+                <li>
+                  <NavLink to="/menu/qrexamples">Example QR Codes</NavLink>
+                </li>
               </MenuList>
             </Menu>
           </Column>
           <Switch>
             <Route path="/menu/dashboard" component={Dashboard} />
             <Route path="/menu/receipts" component={ReceiptList} />
+            <Route path="/menu/qrexamples" component={QRExamples} />
           </Switch>
           <Route path="/menu/receipts/:id" component={Receipt} />
         </Columns>
