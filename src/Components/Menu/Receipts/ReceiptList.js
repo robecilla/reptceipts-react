@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as userActions from '../../../Actions/User';
 import SearchInput, { createFilter } from 'react-search-input';
 
-import { Container, Column, Title, Subtitle } from 'bloomer';
+import { Column, Title, Subtitle } from 'bloomer';
 import ReceiptCard from './ReceiptCard';
 
 function isEmpty(obj) {
@@ -49,9 +48,7 @@ class ReceiptList extends Component {
             padding: '40px 20px',
             display: 'block'
           }}
-        >
-          <Title>Loading...</Title>
-        </Column>
+        />
       );
     }
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../Actions/User';
 
 // Components
-import { Title, Column, Box } from 'bloomer';
+import { Title, Column } from 'bloomer';
 
 class Dashboard extends Component {
   /* This gets called before rendering */
@@ -18,25 +18,21 @@ class Dashboard extends Component {
     /* Waits until user data gets fetched from API */
     if (typeof this.props.user === 'undefined') {
       return (
-        <div>
-          <Column
-            className="is-fullheight"
-            style={{
-              padding: '40px 20px',
-              display: 'block'
-            }}
-          >
-            <Title>Loading...</Title>
-          </Column>
-        </div>
+        <Column
+          className="is-fullheight"
+          style={{
+            padding: '40px 20px',
+            display: 'block'
+          }}
+        />
       );
     }
 
     return (
       <Column
         isSize={{ desktop: 10 }}
-        className="hero is-fullheight"
-        style={{ padding: '40px 20px' }}
+        className="is-fullheight"
+        style={{ padding: '40px 20px', display: 'block' }}
       >
         <Title isSize={3}>Welcome {this.props.user.username}</Title>
       </Column>

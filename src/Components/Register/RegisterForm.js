@@ -77,7 +77,7 @@ class RegisterForm extends Component {
         <Control>
           <Button
             type="submit"
-            disabled={submitting}
+            isLoading={submitting}
             isColor="warning"
             isPulled="left"
           >

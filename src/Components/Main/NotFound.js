@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Title, Column, Button } from 'bloomer';
+import { Title, Column } from 'bloomer';
 
 const NotFound = () => (
   <Column

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as receiptActions from '../../../Actions/Receipt';
 
@@ -12,10 +12,11 @@ import {
   Delete,
   Modal,
   ModalBackground,
-  ModalContent
+  ModalContent,
+  Button
 } from 'bloomer';
+// eslint-disable-next-line
 import ReceiptCardStyle from './box.css';
-import { Button } from 'bloomer/lib/elements/Button';
 
 class ReceiptCard extends Component {
   constructor(props) {

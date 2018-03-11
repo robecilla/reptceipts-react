@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as actions from '../../Actions/Auth';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -14,8 +13,7 @@ class Landing extends Component {
           to={{
             pathname: '/menu/dashboard',
             state: {
-              from: this.props.location,
-              isLoginActive: true
+              from: this.props.location
             }
           }}
         />

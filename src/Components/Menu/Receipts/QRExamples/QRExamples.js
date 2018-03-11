@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
 // Components
-import { Title, Column, Box } from 'bloomer';
+import { Title, Column } from 'bloomer';
 
 class QRExamples extends Component {
   render() {

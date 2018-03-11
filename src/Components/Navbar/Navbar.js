@@ -10,8 +10,7 @@ import {
   NavbarMenu,
   NavbarLink,
   NavbarDropdown,
-  NavbarEnd,
-  Icon
+  NavbarEnd
 } from 'bloomer';
 
 import Brand from './Brand';
@@ -49,8 +48,7 @@ class Nav extends Component {
         <NavbarEnd>
           <NavbarItem hasDropdown isHoverable>
             <NavbarLink>
-              {' '}
-              <i className="fas fa-user-circle" />&nbsp;&nbsp; {loggedin}{' '}
+              <i className="fas fa-user-circle" />&nbsp;&nbsp; {loggedin}
             </NavbarLink>
             <NavbarDropdown isHidden="mobile" isBoxed>
               <NavbarItem>
