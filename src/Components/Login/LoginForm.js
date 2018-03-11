@@ -42,7 +42,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
     return (
       <div>
         <Delete
@@ -79,7 +79,12 @@ class LoginForm extends Component {
 
           <FieldBloomer>
             <Control>
-              <Button type="submit" isColor="warning" isFullWidth>
+              <Button
+                type="submit"
+                isColor="warning"
+                isLoading={submitting}
+                isFullWidth
+              >
                 Log in
               </Button>
             </Control>

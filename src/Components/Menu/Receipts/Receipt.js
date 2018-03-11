@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../../Actions/Receipt';
 
-import {
-  Container,
-  Column,
-  Title,
-  Subtitle,
-  Content,
-  Box,
-  Table
-} from 'bloomer';
-import ReceiptCard from './ReceiptCard';
+import { Column, Subtitle, Content, Box, Table } from 'bloomer';
 
 class Receipt extends Component {
   /* This gets called before rendering */
-  componentWillMount() {
-    const { id } = this.props.match.params;
-    this.props.getReceiptDetail(id);
+  componentDidMount() {
+    if (
+      typeof this.props.retailer ||
+      typeof this.props.receipt === 'undefined'
+    ) {
+      const { id } = this.props.match.params;
+      setTimeout(() => {
+        this.props.getReceiptDetail(id);
+      }, 500);
+    }
   }
 
   render() {
@@ -33,9 +30,7 @@ class Receipt extends Component {
               padding: '40px 20px',
               display: 'block'
             }}
-          >
-            <Title>Loading...</Title>
-          </Column>
+          />
         </div>
       );
     }
@@ -97,18 +92,18 @@ class Receipt extends Component {
                       <td>{item.price}</td>
                     </tr>
                   ))}
-                </tbody>
-                <tfoot>
                   <tr>
                     <td colSpan="2" />
                     <td>Total:</td>
-                    <td>599.36</td>
+                    <td>{receipt.total}</td>
                   </tr>
                   <tr>
                     <td colSpan="2" />
-                    <td>VAT ({receipt.VAT}%):</td>
-                    <td>15.69</td>
+                    <td>VAT ({receipt.VAT_value}%):</td>
+                    <td>{receipt.VAT}</td>
                   </tr>
+                </tbody>
+                <tfoot>
                   <tr>
                     <td colSpan="2" />
                     <td>Subtotal:</td>

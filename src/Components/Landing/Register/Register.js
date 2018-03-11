@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // Components
-import { Title, Subtitle, HeroBody, Columns, Column, Image } from 'bloomer';
+import { Title, Subtitle, HeroBody, Columns, Column } from 'bloomer';
 
 import * as actions from '../../../Actions/Auth';
 import { connect } from 'react-redux';
@@ -29,7 +29,7 @@ class Register extends Component {
 
   render() {
     return (
-      <HeroBody style={{ height: '100vh' }}>
+      <HeroBody id="signup" style={{ height: '100vh' }}>
         <Columns>
           <Column
             isSize={{ mobile: 'full', desktop: 7 }}
@@ -37,9 +37,8 @@ class Register extends Component {
           >
             <Title isSize={3}>Keep your purchase receipts organised</Title>
             <Subtitle isSize={6} style={{ marginTop: '10px' }}>
-              {' '}
               reptceipts helps you organise, manage and redeem your purchase
-              receipts{' '}
+              receipts
             </Subtitle>
           </Column>
         </Columns>
