@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
 // Components
-import {
-  Title,
-  Subtitle,
-  HeroBody,
-  Columns,
-  Column,
-  Box,
-  Content
-} from 'bloomer';
+import { Title, HeroBody, Columns, Column, Content, Button } from 'bloomer';
 import mock1 from '../../../Assets/img/mock1.png';
 
 const mockStyle = {
@@ -29,10 +22,18 @@ class HowItWorks extends Component {
       >
         <Columns isMultiline>
           <Column isSize={12} hasTextAlign="centered">
-            <Title> How it works </Title>
+            <Title>
+              {' '}
+              How it works
+              <Button isOutlined isColor="dark" style={{ marginLeft: '100px' }}>
+                <Link smooth to="#signup">
+                  Sign Up
+                </Link>
+              </Button>
+            </Title>
           </Column>
           <Column hasTextAlign="centered">
-            <img src={mock1} style={mockStyle} />
+            <img src={mock1} style={mockStyle} alt="mock" />
             <Content>
               <Title isSize={5}>GET</Title>
               <p>
@@ -43,7 +44,7 @@ class HowItWorks extends Component {
             </Content>
           </Column>
           <Column hasTextAlign="centered">
-            <img src={mock1} style={mockStyle} />
+            <img src={mock1} style={mockStyle} alt="mock" />
             <Content>
               <Title isSize={5}>MANAGE</Title>
               <p>
@@ -54,7 +55,7 @@ class HowItWorks extends Component {
             </Content>
           </Column>
           <Column hasTextAlign="centered">
-            <img src={mock1} style={mockStyle} />
+            <img src={mock1} style={mockStyle} alt="mock" />
             <Content>
               <Title isSize={5}>REDEEM</Title>
               <p>
