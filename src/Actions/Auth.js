@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
@@ -10,10 +10,12 @@ const ROOT_URL = 'https://reptceipts.com';
 /* Login */
 export function signinUser(values, history) {
   return function(dispatch) {
+    dispatch(showLoading());
     // Here values handles email and password
     const request = axios.post(`${ROOT_URL}/api/login`, values);
     request
       .then(response => {
+        dispatch(hideLoading());
         // Save user specific JWT
         localStorage.setItem('token', response.data.token);
         // If request went good, dispatch redux action to change auth state
@@ -44,9 +46,11 @@ export function signinUser(values, history) {
 /* Register */
 export function registerUser(values, history) {
   return function(dispatch) {
+    dispatch(showLoading());
     axios
       .post(`${ROOT_URL}/api/register`, values)
       .then(response => {
+        dispatch(hideLoading());
         dispatch({
           type: AUTH_USER
         });

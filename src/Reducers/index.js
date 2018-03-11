@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
+import { loadingBarReducer } from 'react-redux-loading-bar';
 import authReducer from './authReducer';
 import UserReducer from './UserReducer';
 import ReceiptReducer from './ReceiptReducer';
 import UIState from './UIState';
 
 const appReducer = combineReducers({
+  loadingBar: loadingBarReducer,
   form: formReducer,
   auth: authReducer,
   user: UserReducer,

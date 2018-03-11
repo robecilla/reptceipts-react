@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 export const GET_RECEIPT_DETAIL = 'GET_RECEIPT_DETAIL';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 const ROOT_URL = 'https://reptceipts.com';
 
 export function getReceiptDetail(id) {
   return function(dispatch) {
+    dispatch(showLoading());
     /* JWT determines the identity of the user */
     axios.defaults.headers.common['Authorization'] =
       'Bearer ' + localStorage.getItem('token');
@@ -13,6 +15,7 @@ export function getReceiptDetail(id) {
       url: `${ROOT_URL}/api/receipt/` + id
     })
       .then(response => {
+        dispatch(hideLoading());
         const receiptDetail = response.data;
         dispatch({
           type: GET_RECEIPT_DETAIL,
@@ -37,6 +40,7 @@ export function getReceiptDetail(id) {
 
 export function deleteReceipt(id) {
   return function(dispatch) {
+    dispatch(showLoading());
     /* JWT determines the identity of the user */
     axios.defaults.headers.common['Authorization'] =
       'Bearer ' + localStorage.getItem('token');
@@ -45,6 +49,7 @@ export function deleteReceipt(id) {
       url: `${ROOT_URL}/api/receipt/` + id
     })
       .then(response => {
+        dispatch(hideLoading());
         dispatch({
           type: DELETE_SUCCESS,
           response: true

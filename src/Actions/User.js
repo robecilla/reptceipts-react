@@ -1,10 +1,13 @@
 import axios from 'axios';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 export const SET_USER = 'SET_USER';
 export const GET_USER_RECEIPTS = 'GET_USER_RECEIPTS';
+
 const ROOT_URL = 'https://reptceipts.com';
 
 export function getUser() {
   return function(dispatch) {
+    dispatch(showLoading());
     /* JWT determines the identity of the user */
     axios.defaults.headers.common['Authorization'] =
       'Bearer ' + localStorage.getItem('token');
@@ -13,10 +16,17 @@ export function getUser() {
       url: `${ROOT_URL}/api/user`
     })
       .then(response => {
-        dispatch({
-          type: SET_USER,
-          payload: response.data.user
-        });
+        if (response.status >= 200 && response.status < 300) {
+          dispatch(hideLoading());
+          dispatch({
+            type: SET_USER,
+            payload: response.data.user
+          });
+        }
+
+        if (response.status === 401) {
+          window.location = '/signout';
+        }
       })
       .catch(error => {
         if (error.response) {
@@ -36,6 +46,7 @@ export function getUser() {
 
 export function getUserReceipts() {
   return function(dispatch) {
+    dispatch(showLoading());
     /* JWT determines the identity of the user */
     axios.defaults.headers.common['Authorization'] =
       'Bearer ' + localStorage.getItem('token');
@@ -44,10 +55,17 @@ export function getUserReceipts() {
       url: `${ROOT_URL}/api/receipt`
     })
       .then(response => {
-        dispatch({
-          type: GET_USER_RECEIPTS,
-          payload: response.data
-        });
+        if (response.status >= 200 && response.status < 300) {
+          dispatch(hideLoading());
+          dispatch({
+            type: GET_USER_RECEIPTS,
+            payload: response.data
+          });
+        }
+
+        if (response.status === 401) {
+          window.location = '/signout';
+        }
       })
       .catch(error => {
         if (error.response) {
