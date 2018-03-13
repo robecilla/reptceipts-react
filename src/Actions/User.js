@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import ROOT_URL from 'config';
+
 export const SET_USER = 'SET_USER';
 export const GET_USER_RECEIPTS = 'GET_USER_RECEIPTS';
 

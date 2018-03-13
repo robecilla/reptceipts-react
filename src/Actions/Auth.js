@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import ROOT_URL from 'config';
+
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const FETCH_MESSAGE = 'FETCH_MESSAGE';
-
-const ROOT_URL = 'reptceipts.com';
 
 /* Login */
 export function signinUser(values, history) {
