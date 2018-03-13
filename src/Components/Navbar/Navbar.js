@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import { connect } from 'react-redux';
 import * as actions from '../../Actions/User';
 
@@ -45,14 +46,15 @@ class Nav extends Component {
     if (this.props.authenticated) {
       return (
         <NavbarEnd>
-          <NavbarItem>
-            <NavLink to="/menu/dashboard">Menu</NavLink>
-          </NavbarItem>
           <NavbarItem hasDropdown isHoverable>
-            <NavbarLink> {loggedin} </NavbarLink>
+            <NavbarLink>
+              <i className="fas fa-user-circle" />&nbsp;&nbsp; {loggedin}
+            </NavbarLink>
             <NavbarDropdown isHidden="mobile" isBoxed>
               <NavbarItem>
-                <NavLink to="/signout">Log Out</NavLink>
+                <NavLink to="/signout">
+                  <i className="fas fa-sign-out-alt" />&nbsp;&nbsp;Log Out
+                </NavLink>
               </NavbarItem>
             </NavbarDropdown>
           </NavbarItem>
@@ -61,13 +63,20 @@ class Nav extends Component {
     } else {
       return (
         <NavbarEnd>
+          <NavbarItem>
+            <Link smooth to="#howitworks">
+              <i class="fas fa-book" />&nbsp;&nbsp;How It Works
+            </Link>
+          </NavbarItem>
           <NavbarItem
             hasDropdown
             isHoverable
             isActive={this.props.isLoginActive}
           >
-            <NavbarLink>Login</NavbarLink>
-            <NavbarDropdown className={'is-right'} isHidden="mobile" isBoxed>
+            <NavbarLink>
+              <i className="fas fa-sign-in-alt" />&nbsp;&nbsp;Login
+            </NavbarLink>
+            <NavbarDropdown className={'is-right'} isBoxed>
               <Login />
             </NavbarDropdown>
           </NavbarItem>

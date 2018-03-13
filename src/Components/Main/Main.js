@@ -6,6 +6,8 @@ import Menu from '../Menu/Menu';
 import Logout from '../Login/Logout';
 import { PrivateRoute } from '../Auth/PrivateRoute';
 
+import NotFound from './NotFound.js';
+
 class Main extends Component {
   render() {
     return (
@@ -14,6 +16,8 @@ class Main extends Component {
         <Route path="/signout" component={Logout} />
         {/* Private Routes */}
         <PrivateRoute path="/menu" component={Menu} />
+        {/* Not found */}
+        <Route component={NotFound} />
       </Switch>
     );
   }

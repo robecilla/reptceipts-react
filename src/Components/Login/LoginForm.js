@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { TOGGLE_LOGIN } from '../../Actions';
 // import { connect } from 'react-redux';
-import { Field as FieldBloomer, Control, Button, Notification } from 'bloomer';
+import {
+  Field as FieldBloomer,
+  Control,
+  Button,
+  Notification,
+  Delete
+} from 'bloomer';
 
 import BloomerField from './BloomerField';
 
@@ -35,9 +42,18 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, submitting } = this.props;
     return (
       <div>
+        <Delete
+          isPulled="right"
+          onClick={() =>
+            this.props.dispatch({
+              type: TOGGLE_LOGIN,
+              isLoginActive: false
+            })
+          }
+        />
         <form onSubmit={handleSubmit}>
           {/* If there's an error it will show up here */}
 
@@ -63,7 +79,12 @@ class LoginForm extends Component {
 
           <FieldBloomer>
             <Control>
-              <Button type="submit" isColor="warning" isFullWidth>
+              <Button
+                type="submit"
+                isColor="warning"
+                isLoading={submitting}
+                isFullWidth
+              >
                 Log in
               </Button>
             </Control>

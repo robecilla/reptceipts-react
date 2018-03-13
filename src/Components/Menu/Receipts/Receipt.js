@@ -1,29 +1,26 @@
 import React, { Component } from 'react';
-import { Switch, Route, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../../Actions/Receipt';
 
-import {
-  Container,
-  Column,
-  Title,
-  Subtitle,
-  Content,
-  Box,
-  Table
-} from 'bloomer';
-import ReceiptCard from './ReceiptCard';
+import { Column, Subtitle, Content, Box, Table } from 'bloomer';
 
 class Receipt extends Component {
   /* This gets called before rendering */
-  componentWillMount() {
-    const { id } = this.props.match.params;
-    this.props.getReceiptDetail(id);
+  componentDidMount() {
+    if (
+      typeof this.props.retailer ||
+      typeof this.props.receipt === 'undefined'
+    ) {
+      const { id } = this.props.match.params;
+      setTimeout(() => {
+        this.props.getReceiptDetail(id);
+      }, 500);
+    }
   }
 
   render() {
     // const items = receiptDetail.items.JSON.parse();
-    /* Waits until user data gets fetched from API */
+    /* Waits until receipt detail data gets fetched from API */
     if (!this.props.receiptDetail) {
       return (
         <div>
@@ -33,9 +30,7 @@ class Receipt extends Component {
               padding: '40px 20px',
               display: 'block'
             }}
-          >
-            <Title>Loading...</Title>
-          </Column>
+          />
         </div>
       );
     }
@@ -72,7 +67,12 @@ class Receipt extends Component {
               <div>{retailer.email}</div>
             </Content>
             <hr />
-            <Content hasTextAlign="centered">
+            <Content>
+              <small>When: {receipt.created_at}</small>
+              <br />
+              <small>Payment Method: {receipt.payment_method}</small>
+              <br />
+              <br />
               <Table isNarrow>
                 <thead>
                   <tr>
@@ -92,22 +92,22 @@ class Receipt extends Component {
                       <td>{item.price}</td>
                     </tr>
                   ))}
+                  <tr>
+                    <td colSpan="2" />
+                    <td>Total:</td>
+                    <td>{receipt.total}</td>
+                  </tr>
+                  <tr>
+                    <td colSpan="2" />
+                    <td>VAT ({receipt.VAT_value}%):</td>
+                    <td>{receipt.VAT}</td>
+                  </tr>
                 </tbody>
                 <tfoot>
                   <tr>
                     <td colSpan="2" />
-                    <td>Total:</td>
-                    <td>599.36</td>
-                  </tr>
-                  <tr>
-                    <td colSpan="2" />
-                    <td>VAT (21%):</td>
-                    <td>15.69</td>
-                  </tr>
-                  <tr>
-                    <td colSpan="2" />
                     <td>Subtotal:</td>
-                    <td>620.25</td>
+                    <td>{receipt.subtotal}</td>
                   </tr>
                 </tfoot>
               </Table>
