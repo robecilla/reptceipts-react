@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import ROOT_URL from 'config';
+import ROOT_URL from './config';
 
 export const GET_RECEIPT_DETAIL = 'GET_RECEIPT_DETAIL';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';
-const ROOT_URL = 'https://reptceipts.com';
 
 export function getReceiptDetail(id) {
   return function(dispatch) {
