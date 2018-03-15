@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import ROOT_URL from './config';
+import { ROOT_URL } from './config';
 
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
