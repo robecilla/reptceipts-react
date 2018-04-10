@@ -4,6 +4,7 @@ import { Field, Label, Control, Icon, Heading, Input, Help } from 'bloomer';
 class BloomerField extends Component {
   render() {
     const {
+      placeholder,
       input,
       label,
       heading,
@@ -19,7 +20,12 @@ class BloomerField extends Component {
       <Field>
         {tag}
         <Control hasIcons="left">
-          <Input {...input} type={type} isColor={errClass} />
+          <Input
+            {...input}
+            type={type}
+            isColor={errClass}
+            placeholder={placeholder}
+          />
           <Icon isSize="small" isAlign="left">
             <span className={icon} aria-hidden="true" />
           </Icon>

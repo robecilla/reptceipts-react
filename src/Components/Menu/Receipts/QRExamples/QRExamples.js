@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 // Components
-import { Title, Column, Field, Control, Label, Input, Button } from 'bloomer';
+import {
+  Title,
+  Column,
+  Columns,
+  Field,
+  Control,
+  Label,
+  Input,
+  Button
+} from 'bloomer';
 
 // function isEmpty(obj) {
 //   for (var key in obj) {
@@ -37,31 +46,37 @@ class QRExamples extends Component {
   render() {
     return (
       <Column
-        isSize={{ desktop: 4 }}
+        isSize={{ desktop: 10 }}
         className="is-fullheight"
         style={{ padding: '40px 20px' }}
       >
-        <Title isSize={3}>Example QR Codes</Title>
-        <form onSubmit={this.generateQR}>
-          <Field>
-            <Label>Generate receipt</Label>
-            <Control>
-              <Input
-                type="text"
-                placeholder="Minifed JSON .."
-                name="qrContent"
-              />
-            </Control>
-          </Field>
-          <Field>
-            <Control>
-              <Button type="submit" isColor="warning">
-                Generate
-              </Button>
-            </Control>
-          </Field>
-        </form>
-        {this.state.qr ? <img src={this.state.qr} alt="qr" /> : false}
+        <Columns>
+          <Column>
+            <Title isSize={3}>Example QR Codes</Title>
+            <form onSubmit={this.generateQR}>
+              <Field>
+                <Label>Generate receipt</Label>
+                <Control>
+                  <Input
+                    type="text"
+                    placeholder="Minifed JSON .."
+                    name="qrContent"
+                  />
+                </Control>
+              </Field>
+              <Field>
+                <Control>
+                  <Button type="submit" isColor="info">
+                    Generate
+                  </Button>
+                </Control>
+              </Field>
+            </form>
+          </Column>
+          <Column>
+            {this.state.qr ? <img src={this.state.qr} alt="qr" /> : false}
+          </Column>
+        </Columns>
       </Column>
     );
   }
