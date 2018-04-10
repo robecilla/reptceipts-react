@@ -1,0 +1,122 @@
+[
+  {
+    "id": 3,
+    "title": "Retailer",
+    "endpoints": [
+      {
+        "id": 8,
+        "method": "GET",
+        "url": "/api/retailer",
+        "description": "Lists all retailers"
+      },
+      {
+        "id": 9,
+        "method": "POST",
+        "url": "/api/retailer",
+        "description": "Creates a new retailer",
+        "params": [
+          {
+            "name": "name",
+            "type": "text"
+          },
+          {
+            "name": "address1",
+            "type": "text"
+          },
+          {
+            "name": "address2",
+            "type": "text"
+          },
+          {
+            "name": "address3",
+            "type": "text"
+          },
+          {
+            "name": "postcode",
+            "type": "text"
+          },
+          {
+            "name": "email",
+            "type": "email"
+          },
+          {
+            "name": "phone_number",
+            "type": "number"
+          },
+          {
+            "name": "mobile_number",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "method": "GET",
+        "url": "/api/retailer/{id}",
+        "description": "Lists a specified retailer",
+        "params": [
+          {
+            "name": "id",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "method": "PUT",
+        "url": "/api/retailer/{id}",
+        "description": "Updates retailer details",
+        "params": [
+          {
+            "name": "id",
+            "type": "text"
+          },
+          {
+            "name": "name",
+            "type": "text"
+          },
+          {
+            "name": "address1",
+            "type": "text"
+          },
+          {
+            "name": "address2",
+            "type": "text"
+          },
+          {
+            "name": "address3",
+            "type": "text"
+          },
+          {
+            "name": "postcode",
+            "type": "text"
+          },
+          {
+            "name": "email",
+            "type": "email"
+          },
+          {
+            "name": "phone_number",
+            "type": "number"
+          },
+          {
+            "name": "mobile_number",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "method": "DELETE",
+        "url": "/api/retailer/{id}",
+        "description": "Deletes a retailer",
+        "params": [
+          {
+            "name": "id",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "id": 2,
+    "title": "User",
+    "endpoints": [
+      {
+        "id": 3,
+        "method": "GET",
+        "url": "/api/user",
+        "description": "Lists all users"
+      },
+      {
+        "id": 4,
+        "method": "POST",
+        "url": "/api/user",
+        "description": "Creates a new user",
+        "params": [
+          {
+            "name": "username",
+            "type": "text"
+          },
+          {
+            "name": "email",
+            "type": "email"
+          },
+          {
+            "name": "password",
+            "type": "password"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "method": "GET",
+        "url": "/api/user/{id}",
+        "description": "Lists a specified user",
+        "params": [
+          {
+            "name": "id",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "method": "PUT",
+        "url": "/api/user/{id}",
+        "description": "Updates user details",
+        "params": [
+          {
+            "name": "id",
+            "type": "text"
+          },
+          {
+            "name": "username",
+            "type": "text"
+          },
+          {
+            "name": "email",
+            "type": "email"
+          },
+          {
+            "name": "password",
+            "type": "password"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "method": "DELETE",
+        "url": "/api/user/{id}",
+        "description": "Deletes a user",
+        "params": [
+          {
+            "name": "id",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Switch, Route, NavLink } from 'react-router-dom';
 import { Menu, MenuList, Columns, Column } from 'bloomer';
-import Dashboard from './Dashboard/Dashboard';
 import ReceiptList from './Receipts/ReceiptList';
 import Receipt from './Receipts/Receipt';
 import QRExamples from './Receipts/QRExamples/QRExamples';
-
-import './Menu.css';
+import Console from './Console/Console';
 
 class MenuBar extends Component {
   render() {
@@ -27,22 +25,22 @@ class MenuBar extends Component {
               <br />
               <MenuList style={{ padding: '40px' }}>
                 <li>
-                  <NavLink to="/menu/dashboard">Dashboard</NavLink>
-                </li>
-                <li>
                   <NavLink to="/menu/receipts">Receipts</NavLink>
                 </li>
                 <hr />
                 <li>
                   <NavLink to="/menu/qrexamples">Example QR Codes</NavLink>
                 </li>
+                <li>
+                  <NavLink to="/menu/console">API Console</NavLink>
+                </li>
               </MenuList>
             </Menu>
           </Column>
           <Switch>
-            <Route path="/menu/dashboard" component={Dashboard} />
             <Route path="/menu/receipts" component={ReceiptList} />
             <Route path="/menu/qrexamples" component={QRExamples} />
+            <Route path="/menu/console" component={Console} />
           </Switch>
           <Route path="/menu/receipts/:id" component={Receipt} />
         </Columns>
