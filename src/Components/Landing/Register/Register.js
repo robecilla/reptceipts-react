@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// Components
 import { Title, Subtitle, HeroBody, Columns, Column } from 'bloomer';
+import Error from '../../Helpers/Error';
+import RegisterForm from '../../Register/RegisterForm';
 
 import * as actions from '../../../Actions/Auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import RegisterForm from '../../Register/RegisterForm';
 
 class Register extends Component {
   static contextTypes = {
@@ -17,12 +17,6 @@ class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillUnmount() {
-    if (this.props.errorMessage) {
-      this.props.authError(null);
-    }
-  }
-
   handleSubmit(values) {
     this.props.registerUser(values, this.context.router.history);
   }
@@ -30,10 +24,10 @@ class Register extends Component {
   render() {
     return (
       <HeroBody id="signup" style={{ height: '100vh' }}>
-        <Columns>
+        <Columns isMultiline>
           <Column
-            isSize={{ mobile: 'full', desktop: 7 }}
-            isOffset={{ desktop: 1 }}
+            isSize={{ widescreen: 12, desktop: 12, tablet: 12, mobile: 8 }}
+            isOffset={{ widescreen: 2, desktop: 1, tablet: 1, mobile: 2 }}
           >
             <Title isSize={3}>Keep your purchase receipts organised</Title>
             <Subtitle isSize={6} style={{ marginTop: '10px' }}>
@@ -41,16 +35,17 @@ class Register extends Component {
               receipts
             </Subtitle>
           </Column>
-        </Columns>
-        <Columns>
           <Column
-            isSize={{ mobile: 'full', tablet: 5, desktop: 3 }}
-            isOffset={{ desktop: 1 }}
+            isSize={{ widescreen: 3, desktop: 4, tablet: 4, mobile: 8 }}
+            isOffset={{ widescreen: 2, desktop: 1, tablet: 1, mobile: 2 }}
           >
-            <RegisterForm
-              onSubmit={this.handleSubmit}
-              errorMessage={this.props.errorMessage}
-            />
+            {this.props.registerError ? (
+              <Error error={this.props.registerError} />
+            ) : (
+              false
+            )}
+
+            <RegisterForm onSubmit={this.handleSubmit} />
           </Column>
         </Columns>
       </HeroBody>
@@ -60,7 +55,7 @@ class Register extends Component {
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.auth.error,
+    registerError: state.auth.registerError,
     ui: state.ui
   };
 }

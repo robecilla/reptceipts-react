@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Columns, Column } from 'bloomer';
+import Error from '../Helpers/Error';
+import LoginForm from './LoginForm';
+
 import * as actions from '../../Actions/Auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import LoginForm from './LoginForm';
 
 const loginStyle = {
   width: '250px',
@@ -21,12 +22,6 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillUnmount() {
-    if (this.props.errorMessage) {
-      this.props.authError(null);
-    }
-  }
-
   handleSubmit(values) {
     this.props.signinUser(values, this.context.router.history);
   }
@@ -36,10 +31,12 @@ class Login extends Component {
       <Container isFluid="isFluid">
         <Columns>
           <Column style={loginStyle}>
-            <LoginForm
-              onSubmit={this.handleSubmit}
-              errorMessage={this.props.errorMessage}
-            />
+            {this.props.loginError ? (
+              <Error error={this.props.loginError} />
+            ) : (
+              false
+            )}
+            <LoginForm onSubmit={this.handleSubmit} />
           </Column>
         </Columns>
       </Container>
@@ -48,7 +45,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return { errorMessage: state.auth.error };
+  return { loginError: state.auth.loginError };
 }
 
 export default connect(mapStateToProps, actions)(Login);

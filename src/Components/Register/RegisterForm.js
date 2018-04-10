@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { TOGGLE_LOGIN } from '../../Actions';
-// import { connect } from 'react-redux';
-import { Control, Button, Notification } from 'bloomer';
+import {
+  Control,
+  Button,
+  Notification,
+  Field as FieldBloom,
+  Column
+} from 'bloomer';
+
+import divider from 'bulma-divider/dist/bulma-divider.min.css';
+
 import BloomerField from '../Login/BloomerField';
 import './Register.css';
 
@@ -30,24 +38,10 @@ const validate = values => {
 };
 
 class RegisterForm extends Component {
-  renderError() {
-    if (this.props.errorMessage) {
-      return (
-        <Notification isColor="danger" hasTextAlign="centered">
-          {this.props.errorMessage}
-        </Notification>
-      );
-    }
-  }
-
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        {/* If there's an error it will show up here */}
-
-        {this.renderError()}
-
         <Field
           name="username"
           type="text"
@@ -72,22 +66,19 @@ class RegisterForm extends Component {
           icon="fa fa-key"
         />
 
-        <br />
-
-        <Control>
+        <FieldBloom>
           <Button
             type="submit"
             isLoading={submitting}
-            isColor="warning"
-            isPulled="left"
+            isColor="info"
+            isFullWidth
           >
             Sign Up
           </Button>
-        </Control>
-        <Control>
+          <div className="is-divider" data-content="OR" />
           <Button
             isColor="dark"
-            isPulled="right"
+            isFullWidth
             onClick={() =>
               this.props.dispatch({
                 type: TOGGLE_LOGIN,
@@ -97,7 +88,7 @@ class RegisterForm extends Component {
           >
             Log In
           </Button>
-        </Control>
+        </FieldBloom>
       </form>
     );
   }

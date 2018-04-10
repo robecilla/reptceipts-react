@@ -31,16 +31,6 @@ const validate = values => {
 };
 
 class LoginForm extends Component {
-  renderError() {
-    if (this.props.errorMessage) {
-      return (
-        <Notification isColor="danger" hasTextAlign="centered">
-          {this.props.errorMessage}
-        </Notification>
-      );
-    }
-  }
-
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
@@ -55,10 +45,6 @@ class LoginForm extends Component {
           }
         />
         <form onSubmit={handleSubmit}>
-          {/* If there's an error it will show up here */}
-
-          {this.renderError()}
-
           <Field
             name="email"
             type="email"
@@ -81,7 +67,7 @@ class LoginForm extends Component {
             <Control>
               <Button
                 type="submit"
-                isColor="warning"
+                isColor="info"
                 isLoading={submitting}
                 isFullWidth
               >
