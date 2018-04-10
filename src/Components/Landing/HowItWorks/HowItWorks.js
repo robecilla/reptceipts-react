@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
-// Components
 import { Title, HeroBody, Columns, Column, Content, Button } from 'bloomer';
-import mock1 from '../../../Assets/img/mock1.png';
+
+import text from './text_nodes.json';
 
 const mockStyle = {
   maxWidth: '48%',
@@ -11,60 +11,29 @@ const mockStyle = {
 
 class HowItWorks extends Component {
   render() {
+    let i = 0;
     return (
       <HeroBody
         id="howitworks"
         style={{
           height: '100vh',
-          backgroundColor: '#ffdd57',
-          color: 'rgba(0, 0, 0, 0.7)'
+          backgroundColor: '#209cee',
+          color: 'white'
         }}
       >
         <Columns isMultiline>
           <Column isSize={12} hasTextAlign="centered">
-            <Title>
-              {' '}
-              How it works
-              <Button isOutlined isColor="dark" style={{ marginLeft: '100px' }}>
-                <Link smooth to="#signup">
-                  Sign Up
-                </Link>
-              </Button>
-            </Title>
+            <Title>How it works</Title>
           </Column>
-          <Column hasTextAlign="centered">
-            <img src={mock1} style={mockStyle} alt="mock" />
-            <Content>
-              <Title isSize={5}>GET</Title>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                lobortis arcu vitae egestas faucibus. Integer rutrum felis
-                justo, ut convallis ante dictum vel.
-              </p>
-            </Content>
-          </Column>
-          <Column hasTextAlign="centered">
-            <img src={mock1} style={mockStyle} alt="mock" />
-            <Content>
-              <Title isSize={5}>MANAGE</Title>
-              <p>
-                Aenean sagittis placerat eros. In mauris massa, congue id turpis
-                ut, suscipit sodales erat. Donec quis facilisis dolor, eu
-                pellentesque orci. Nam quis gravida ipsum, vel luctus felis.{' '}
-              </p>
-            </Content>
-          </Column>
-          <Column hasTextAlign="centered">
-            <img src={mock1} style={mockStyle} alt="mock" />
-            <Content>
-              <Title isSize={5}>REDEEM</Title>
-              <p>
-                Etiam lobortis erat venenatis, vehicula libero sed, congue
-                ipsum. Mauris tempor, tortor at gravida pretium, leo elit
-                placerat nulla, sed malesuada mi felis id tellus.
-              </p>
-            </Content>
-          </Column>
+          {text.map(t => (
+            <Column hasTextAlign="centered" key={i++}>
+              <img src={t.img.path} style={mockStyle} alt="mock" />
+              <Content>
+                <Title isSize={5}>{t.title}</Title>
+                <p>{t.text}</p>
+              </Content>
+            </Column>
+          ))}
         </Columns>
       </HeroBody>
     );

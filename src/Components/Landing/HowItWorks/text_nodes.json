@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Get",
+    "text":
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lobortis arcu vitae egestas faucibus. Integer rutrum felis justo, ut convallis ante dictum vel.",
+    "img": {
+      "path": "../../../Assets/img/mock1.png",
+      "name": "mock1"
+    }
+  },
+  {
+    "title": "Manage",
+    "text":
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lobortis arcu vitae egestas faucibus. Integer rutrum felis justo, ut convallis ante dictum vel.",
+    "img": {
+      "path": "../../../Assets/img/mock1.png",
+      "name": "mock1"
+    }
+  },
+  {
+    "title": "Reedem",
+    "text":
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lobortis arcu vitae egestas faucibus. Integer rutrum felis justo, ut convallis ante dictum vel.",
+    "img": {
+      "path": "../../../Assets/img/mock1.png",
+      "name": "mock1"
+    }
+  }
+]
