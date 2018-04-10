@@ -11,7 +11,7 @@ class Landing extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/menu/dashboard',
+            pathname: '/menu/receipts',
             state: {
               from: this.props.location
             }
