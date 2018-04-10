@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { ROOT_URL } from './config';
+import { SET_USER } from './User';
 
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const FETCH_MESSAGE = 'FETCH_MESSAGE';
+export const REGISTER_ERROR = 'REGISTER_ERROR';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
 
 /* Login */
 export function signinUser(values, history) {
@@ -15,30 +16,25 @@ export function signinUser(values, history) {
     const request = axios.post(`${ROOT_URL}/api/login`, values);
     request
       .then(response => {
-        dispatch(hideLoading());
         // Save user specific JWT
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', response.data.response.token);
         // If request went good, dispatch redux action to change auth state
         dispatch({
           type: AUTH_USER
         });
-        // Redirect user to dashboard
-        history.push('/menu/dashboard');
+
+        getThisUser(response.data.response.token, dispatch, history);
       })
       // If bad request, call the error handler
       .catch(error => {
-        // Error
-        if (error.response) {
-          dispatch(authError(error.response.data));
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-        }
+        dispatch({
+          type: LOGIN_ERROR,
+          payload: error.response.data.response
+        });
+      })
+      .then(() => {
+        // Hide loader on request completion
+        dispatch(hideLoading());
       });
   };
 }
@@ -50,39 +46,56 @@ export function registerUser(values, history) {
     axios
       .post(`${ROOT_URL}/api/register`, values)
       .then(response => {
-        dispatch(hideLoading());
+        // Save user specific JWT
+        localStorage.setItem('token', response.data.response.token);
+        // If request went good, dispatch redux action to change auth state
         dispatch({
           type: AUTH_USER
         });
-        localStorage.setItem('token', response.data.token);
-        history.push('/menu/dashboard');
+
+        getThisUser(response.data.response.token, dispatch, history);
       })
       .catch(error => {
-        if (error.response) {
-          dispatch(authError(error.response.data));
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-        }
+        dispatch({
+          type: REGISTER_ERROR,
+          payload: error.response.data.response
+        });
+      })
+      .then(() => {
+        // Hide loader on request completion
+        dispatch(hideLoading());
       });
-  };
-}
-
-export function authError(error) {
-  return {
-    type: AUTH_ERROR,
-    payload: error
   };
 }
 
 export function signoutUser() {
   localStorage.removeItem('token');
+  localStorage.removeItem('console_token');
   return {
     type: UNAUTH_USER
   };
+}
+
+function getThisUser(token, dispatch, history) {
+  axios({
+    method: 'GET',
+    url: `${ROOT_URL}/api/user/JWTuser`,
+    headers: { Authorization: 'Bearer ' + token }
+  })
+    .then(response => {
+      console.log(response);
+      if (response.status >= 200 && response.status < 300) {
+        dispatch({
+          type: SET_USER,
+          payload: response.data.response.user
+        });
+        //change route
+        history.push('/menu/receipts');
+      }
+    })
+    .catch(error => {
+      if (error.response.status === 401) {
+        window.location = '/signout';
+      }
+    });
 }
