@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Moment from 'react-moment';
+
 import * as actions from '../../../Actions/Receipt';
 
 import { Column, Subtitle, Content, Box, Table } from 'bloomer';
@@ -35,6 +37,7 @@ class Receipt extends Component {
       );
     }
 
+    let i = 0;
     const retailer = this.props.receiptDetail.retailer;
     const receipt = this.props.receiptDetail.receipt;
     const items = JSON.parse(this.props.receiptDetail.receipt.items);
@@ -68,15 +71,20 @@ class Receipt extends Component {
             </Content>
             <hr />
             <Content>
-              <small>When: {receipt.created_at}</small>
-              <br />
-              <small>Payment Method: {receipt.payment_method}</small>
+              <small style={{ float: 'right' }}>
+                <strong>When: </strong>
+                <Moment format="DD MMM YYYY">{receipt.created_at}</Moment>
+              </small>
+              <small>
+                <strong>Payment Method: </strong>
+                {receipt.payment_method}
+              </small>
               <br />
               <br />
               <Table isNarrow>
                 <thead>
                   <tr>
-                    <th>Serial No</th>
+                    <th>Ref</th>
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Price</th>
@@ -85,8 +93,10 @@ class Receipt extends Component {
                 <tbody>
                   {/* Loops through user receipts and render */
                   items.map(item => (
-                    <tr key={item.id}>
-                      <td>{item.serial_no}</td>
+                    <tr key={i++}>
+                      <td>
+                        <small>{item.serial_no}</small>
+                      </td>
                       <td>{item.name}</td>
                       <td>x{item.quantity}</td>
                       <td>{item.price}</td>
@@ -106,8 +116,12 @@ class Receipt extends Component {
                 <tfoot>
                   <tr>
                     <td colSpan="2" />
-                    <td>Subtotal:</td>
-                    <td>{receipt.subtotal}</td>
+                    <td>
+                      <strong>Subtotal:</strong>
+                    </td>
+                    <td>
+                      <strong>{receipt.subtotal}</strong>
+                    </td>
                   </tr>
                 </tfoot>
               </Table>

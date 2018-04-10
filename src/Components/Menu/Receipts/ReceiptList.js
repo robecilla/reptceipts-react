@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as userActions from '../../../Actions/User';
 import SearchInput, { createFilter } from 'react-search-input';
 
+import apk from '../../../Assets/apk/app-release.apk';
+
 import { Column, Title, Subtitle } from 'bloomer';
 import ReceiptCard from './ReceiptCard';
 
@@ -22,18 +24,13 @@ class ReceiptList extends Component {
       searchTerm: ''
     };
     this.searchUpdated = this.searchUpdated.bind(this);
+    if (typeof this.props.receipts === 'undefined') {
+      this.props.getUserReceipts();
+    }
   }
 
   searchUpdated(term) {
     this.setState({ searchTerm: term });
-  }
-
-  /* This gets called before rendering */
-  componentDidMount() {
-    /* Avoids fetching the user everythime this component gets rendered */
-    if (typeof this.props.receipts === 'undefined') {
-      this.props.getUserReceipts();
-    }
   }
 
   render() {
@@ -63,7 +60,13 @@ class ReceiptList extends Component {
           }}
         >
           <Title>Sorry, you appear to not have any receipt!</Title>
-          <Title>Download the app!</Title>
+          <Title>
+            <a href={apk} download>
+              {' '}
+              Download{' '}
+            </a>{' '}
+            the app!
+          </Title>
         </Column>
       );
     }
