@@ -15,42 +15,41 @@ import {
 
 import Brand from './Brand';
 import Login from '../Login/Login';
+import UpdateUserDetail from './UpdateUserDetail';
 
 class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMenuOpen: false
+      isUpdateActive: false
     };
-    this.burgerClick = this.burgerClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.props.getUser();
   }
 
-  componentWillMount() {
-    /* Avoids fetching the user everythime this component gets rendered */
-    if (
-      typeof this.props.authenticated !== 'undefined' &&
-      typeof this.props.user === 'undefined'
-    ) {
-      this.props.getUser();
-    }
+  handleClick() {
+    this.setState({ isUpdateActive: true });
+  }
+
+  closeModal() {
+    this.props.getUser();
+    this.setState({ isUpdateActive: false });
   }
 
   links() {
-    let loggedin;
-    if (typeof this.props.user === 'undefined') {
-      loggedin = 'Loading...';
-    } else {
-      loggedin = this.props.user.username;
-    }
-
     if (this.props.authenticated) {
       return (
         <NavbarEnd>
           <NavbarItem hasDropdown isHoverable>
             <NavbarLink>
-              <i className="fas fa-user-circle" />&nbsp;&nbsp; {loggedin}
+              <i className="fas fa-user-circle" />&nbsp;&nbsp;{' '}
+              {this.props.user ? this.props.user.username : 'Loading ..'}
             </NavbarLink>
             <NavbarDropdown isHidden="mobile" isBoxed>
+              <NavbarItem href="#/" onClick={this.handleClick}>
+                <i className="fas fa-edit" />&nbsp;&nbsp;My details
+              </NavbarItem>
               <NavbarItem>
                 <NavLink to="/signout">
                   <i className="fas fa-sign-out-alt" />&nbsp;&nbsp;Log Out
@@ -65,7 +64,7 @@ class Nav extends Component {
         <NavbarEnd>
           <NavbarItem>
             <Link smooth to="#howitworks">
-              <i class="fas fa-book" />&nbsp;&nbsp;How It Works
+              <i className="fas fa-book" />&nbsp;&nbsp;How It Works
             </Link>
           </NavbarItem>
           <NavbarItem
@@ -85,20 +84,16 @@ class Nav extends Component {
     }
   }
 
-  burgerClick(newState) {
-    // Open and closes menu when mobile
-    this.setState({ isActive: newState });
-  }
-
   render() {
     return (
-      <Navbar className="is-warning has-shadow">
-        <Brand
-          isMenuOpen={this.state.isMenuOpen}
-          callbackParent={newState => this.burgerClick(newState)}
-        />
+      <Navbar className="is-info has-shadow">
+        <Brand />
         {/* Injecting links */}
         <NavbarMenu isActive={this.state.isActive}>{this.links()}</NavbarMenu>
+        <UpdateUserDetail
+          isActive={this.state.isUpdateActive}
+          closeModal={() => this.closeModal()}
+        />
       </Navbar>
     );
   }
