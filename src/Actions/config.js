@@ -1,1 +1,1 @@
-export const ROOT_URL = 'http://api.reptceipts.com';
+export const ROOT_URL = 'http://api.reptceipts.co.uk/';
