@@ -4,10 +4,14 @@ import { ROOT_URL } from './config';
 
 export const GET_RECEIPT_DETAIL = 'GET_RECEIPT_DETAIL';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';
+export const TOGGLE_RECEIPT_DETAIL_LOADER = 'TOGGLE_RECEIPT_DETAIL_LOADER';
 
 export function getReceiptDetail(id) {
   return function(dispatch) {
-    dispatch(showLoading());
+    dispatch({
+      type: TOGGLE_RECEIPT_DETAIL_LOADER,
+      payload: true
+    });
     /* JWT determines the identity of the user */
     axios({
       method: 'GET',
@@ -36,14 +40,16 @@ export function getReceiptDetail(id) {
       })
       .then(() => {
         // Hide loader on request completion
-        dispatch(hideLoading());
+        dispatch({
+          type: TOGGLE_RECEIPT_DETAIL_LOADER,
+          payload: false
+        });
       });
   };
 }
 
-export function deleteReceipt(id) {
+export function deleteReceipt(id, callBack, history) {
   return function(dispatch) {
-    dispatch(showLoading());
     /* JWT determines the identity of the user */
     axios({
       method: 'DELETE',
@@ -51,10 +57,8 @@ export function deleteReceipt(id) {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     })
       .then(response => {
-        dispatch({
-          type: DELETE_SUCCESS,
-          response: true
-        });
+        callBack();
+        history.push('/receipts');
       })
       .catch(error => {
         if (error.response) {
@@ -68,10 +72,6 @@ export function deleteReceipt(id) {
           // Something happened in setting up the request that triggered an Error
           console.log('Error', error.message);
         }
-      })
-      .then(() => {
-        // Hide loader on request completion
-        dispatch(hideLoading());
       });
   };
 }
