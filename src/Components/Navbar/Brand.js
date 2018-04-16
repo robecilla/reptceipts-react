@@ -3,6 +3,19 @@ import { NavbarBrand, NavbarItem, NavbarBurger, Title } from 'bloomer';
 import { NavLink } from 'react-router-dom';
 
 class Brand extends Component {
+  constructor(props) {
+    super();
+    this.state = { isBurgerActive: props.isBurgerActive };
+    // This binding is necessary to make `this` work in the callback
+    this.onClickBurger = this.onClickBurger.bind(this);
+  }
+
+  onClickBurger() {
+    const newState = !this.state.isBurgerActive;
+    this.setState({ isBurgerActive: newState }); // we update our state
+    this.props.callbackParent(newState); // we notify our parent
+  }
+
   render() {
     return (
       <NavbarBrand>
@@ -13,6 +26,10 @@ class Brand extends Component {
             </Title>
           </NavLink>
         </NavbarItem>
+        <NavbarBurger
+          isActive={this.state.isBurgerActive}
+          onClick={this.onClickBurger}
+        />
       </NavbarBrand>
     );
   }

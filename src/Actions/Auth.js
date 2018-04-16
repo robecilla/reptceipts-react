@@ -90,7 +90,7 @@ function getThisUser(token, dispatch, history) {
           payload: response.data.response.user
         });
         //change route
-        history.push('/menu/receipts');
+        history.push('/receipts');
       }
     })
     .catch(error => {

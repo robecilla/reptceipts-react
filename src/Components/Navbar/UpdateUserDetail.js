@@ -78,7 +78,7 @@ class UpdateUserDetail extends Component {
 
   handleSubmit(values) {
     values.id = this.props.user.id;
-    this.props.updateDetails(values);
+    this.props.updateDetails(values, this.props.getUser);
   }
 
   toggleCollapse() {

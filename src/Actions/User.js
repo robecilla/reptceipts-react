@@ -6,6 +6,7 @@ export const SET_USER = 'SET_USER';
 export const GET_USER_RECEIPTS = 'GET_USER_RECEIPTS';
 export const UPDATE_RESULT = 'UPDATE_RESULT';
 export const DELETE_RESULT = 'DELETE_RESULT';
+export const TOGGLE_RECEIPTS_LOADER = 'TOGGLE_RECEIPTS_LOADER';
 
 export function getUser() {
   return function(dispatch) {
@@ -32,9 +33,9 @@ export function getUser() {
           console.log(error);
           console.log(error.response);
 
-          // if(error.response.status === 401) {
-          //   window.location = '/signout';
-          // }
+          if (error.response.status === 401) {
+            window.location = '/signout';
+          }
         })
         .then(() => {
           // Hide loader on request completion
@@ -46,7 +47,10 @@ export function getUser() {
 
 export function getUserReceipts() {
   return function(dispatch) {
-    dispatch(showLoading());
+    dispatch({
+      type: TOGGLE_RECEIPTS_LOADER,
+      payload: true
+    });
     /* JWT determines the identity of the user */
     let token = localStorage.getItem('token');
 
@@ -67,18 +71,21 @@ export function getUserReceipts() {
       .catch(error => {
         console.log(error);
         console.log(error.response);
-        // if(error.response.status === 401) {
-        //   window.location = '/signout';
-        // }
+        if (error.response.status === 401) {
+          window.location = '/signout';
+        }
       })
       .then(() => {
         // Hide loader on request completion
-        dispatch(hideLoading());
+        dispatch({
+          type: TOGGLE_RECEIPTS_LOADER,
+          payload: false
+        });
       });
   };
 }
 
-export function updateDetails(values) {
+export function updateDetails(values, getUser) {
   return function(dispatch) {
     dispatch(showLoading());
     values._method = 'PUT';
@@ -95,6 +102,7 @@ export function updateDetails(values) {
             type: UPDATE_RESULT,
             payload: response.data
           });
+          getUser();
         }
       })
       .catch(error => {

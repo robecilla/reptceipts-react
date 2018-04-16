@@ -21,11 +21,18 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isUpdateActive: false
+      isUpdateActive: false,
+      isBurgerActive: false
     };
+    this.burgerClick = this.burgerClick.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.props.getUser();
+  }
+
+  burgerClick(newState) {
+    // Open and closes menu when mobile
+    this.setState({ isBurgerActive: newState });
   }
 
   handleClick() {
@@ -33,7 +40,6 @@ class Nav extends Component {
   }
 
   closeModal() {
-    this.props.getUser();
     this.setState({ isUpdateActive: false });
   }
 
@@ -41,6 +47,12 @@ class Nav extends Component {
     if (this.props.authenticated) {
       return (
         <NavbarEnd>
+          <NavbarItem>
+            <NavLink to="/receipts">My Receipts</NavLink>
+          </NavbarItem>
+          <NavbarItem>
+            <NavLink to="/console">API Console</NavLink>
+          </NavbarItem>
           <NavbarItem hasDropdown isHoverable>
             <NavbarLink>
               <i className="fas fa-user-circle" />&nbsp;&nbsp;{' '}
@@ -63,7 +75,7 @@ class Nav extends Component {
       return (
         <NavbarEnd>
           <NavbarItem>
-            <Link smooth to="#howitworks">
+            <Link smooth to="#howitworks" style={{ color: 'white' }}>
               <i className="fas fa-book" />&nbsp;&nbsp;How It Works
             </Link>
           </NavbarItem>
@@ -87,12 +99,18 @@ class Nav extends Component {
   render() {
     return (
       <Navbar className="is-info has-shadow">
-        <Brand />
+        <Brand
+          isBurgerActive={this.state.isBurgerActive}
+          callbackParent={newState => this.burgerClick(newState)}
+        />
         {/* Injecting links */}
-        <NavbarMenu isActive={this.state.isActive}>{this.links()}</NavbarMenu>
+        <NavbarMenu isActive={this.state.isBurgerActive}>
+          {this.links()}
+        </NavbarMenu>
         <UpdateUserDetail
           isActive={this.state.isUpdateActive}
           closeModal={() => this.closeModal()}
+          getUser={() => this.props.getUser()}
         />
       </Navbar>
     );

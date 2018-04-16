@@ -23,11 +23,11 @@ class Register extends Component {
 
   render() {
     return (
-      <HeroBody id="signup" style={{ height: '100vh' }}>
+      <HeroBody style={{ height: '100vh' }}>
         <Columns isMultiline>
           <Column
-            isSize={{ widescreen: 12, desktop: 12, tablet: 12, mobile: 8 }}
-            isOffset={{ widescreen: 2, desktop: 1, tablet: 1, mobile: 2 }}
+            isSize={{ widescreen: 12, desktop: 12, tablet: 12, mobile: 'full' }}
+            isOffset={{ widescreen: 2, desktop: 1, tablet: 1 }}
           >
             <Title isSize={3}>Keep your purchase receipts organised</Title>
             <Subtitle isSize={6} style={{ marginTop: '10px' }}>
@@ -36,8 +36,8 @@ class Register extends Component {
             </Subtitle>
           </Column>
           <Column
-            isSize={{ widescreen: 3, desktop: 4, tablet: 4, mobile: 8 }}
-            isOffset={{ widescreen: 2, desktop: 1, tablet: 1, mobile: 2 }}
+            isSize={{ widescreen: 3, desktop: 4, tablet: 4, mobile: 'full' }}
+            isOffset={{ widescreen: 2, desktop: 1, tablet: 1 }}
           >
             {this.props.registerError ? (
               <Error error={this.props.registerError} />
