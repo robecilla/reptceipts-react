@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import { Field, Tag, Input, Column, Subtitle } from 'bloomer';
-import { ROOT_URL } from '../../../../Actions/config';
+import { ROOT_URL } from '../../../../../Actions/config';
 
 import GoButton from './Components/GoButton';
 
@@ -56,7 +56,7 @@ class AuthLogin extends Component {
     let i = 0;
     return (
       <Column
-        isSize={5}
+        isSize={{ mobile: 10, tablet: 5, desktop: 5, widescreen: 5 }}
         isHidden={
           typeof this.props.isHidden !== 'undefined'
             ? !this.props.isHidden

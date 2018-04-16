@@ -18,42 +18,47 @@ JSON.forEach(function(file) {
 
 class Console extends Component {
   render() {
+    let token = localStorage.getItem('console_token');
     return (
       <Column
-        isSize={{ desktop: 10 }}
-        className="is-fullheight"
-        style={{ padding: '40px 20px' }}
+        isSize={{
+          widescreen: 10,
+          desktop: 'full',
+          tablet: 'full',
+          mobile: 'full'
+        }}
+        isOffset={{ widescreen: 1 }}
+        style={{ padding: '40px 30px' }}
       >
         <Title>API Console</Title>
         <Notification>
           <Columns>
-            <Column isSize={7}>
+            <Column>
               This is the <strong>API Console</strong>. <br />
               Here is where you can test all the endpoints of the aplication.{' '}
               <br />
               For example, you can create retailers or generate QR receipts.
             </Column>
-            <Column isSize={4}>
-              <strong>Intructions:</strong> <br />
+            <Column>
+              <strong>Intructions</strong> <br />
               Create a token through the Auth endpoint. <br />
               You're now able to perform other calls.
             </Column>
           </Columns>
         </Notification>
         <Columns isMultiline>
-          <AuthLogin />
-          {allJSON.map(json => (
-            <EndpointBox
-              isHidden={
-                typeof this.props.isHidden !== 'undefined'
-                  ? this.props.isHidden
-                  : true
-              }
-              key={json[0].id}
-              title={json[0].title}
-              endpoints={json[0].endpoints}
-            />
-          ))}
+          {token ? (
+            allJSON.map(json => (
+              <EndpointBox
+                key={json[0].id}
+                title={json[0].title}
+                endpoints={json[0].endpoints}
+                user={this.props.user ? this.props.user : false}
+              />
+            ))
+          ) : (
+            <AuthLogin />
+          )}
         </Columns>
       </Column>
     );
@@ -62,7 +67,8 @@ class Console extends Component {
 
 function mapStateToProps(state) {
   return {
-    isHidden: state.ui.isHidden
+    isHidden: state.ui.isHidden,
+    user: state.user.user
   };
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box } from 'bloomer';
+import { Box, Content } from 'bloomer';
 import { Collapse } from 'react-collapse';
 
 import Result from './Components/Result';
@@ -25,7 +25,7 @@ class Endpoint extends Component {
   }
 
   render() {
-    const { id, method, description, url, params } = this.props;
+    const { id, method, description, url, params, user } = this.props;
     return (
       <div>
         <Box style={{ padding: '10px 15px' }}>
@@ -41,6 +41,7 @@ class Endpoint extends Component {
             method={method}
             url={url}
             callbackParent={result => this.getResult(result)}
+            user={user}
           />
           <br />
           {this.state.result ? <Result result={this.state.result} /> : false}

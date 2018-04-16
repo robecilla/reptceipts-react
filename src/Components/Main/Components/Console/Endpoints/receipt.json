@@ -46,7 +46,8 @@
             ],
             "payment": "VISA ending 8945",
             "vat": 20,
-            "scan_type": 2
+            "scan_type": 2,
+            "is_redeemable": true
           }
         ]
       },
