@@ -5,3 +5,15 @@ body {
 .pointer {
   cursor: pointer;
 }
+
+.login {
+  width: 250px;
+  margin: 20px 0px;
+}
+
+@media screen and (max-width: 768px) {
+  .login {
+    width: 375px;
+    margin: 0px 20px;
+  }
+}

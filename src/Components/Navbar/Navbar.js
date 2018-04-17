@@ -58,7 +58,7 @@ class Nav extends Component {
               <i className="fas fa-user-circle" />&nbsp;&nbsp;{' '}
               {this.props.user ? this.props.user.username : 'Loading ..'}
             </NavbarLink>
-            <NavbarDropdown isHidden="mobile" isBoxed>
+            <NavbarDropdown isBoxed>
               <NavbarItem href="#/" onClick={this.handleClick}>
                 <i className="fas fa-edit" />&nbsp;&nbsp;My details
               </NavbarItem>
@@ -74,8 +74,8 @@ class Nav extends Component {
     } else {
       return (
         <NavbarEnd>
-          <NavbarItem>
-            <Link smooth to="#howitworks" style={{ color: 'white' }}>
+          <NavbarItem hasDropdown isHoverable>
+            <Link smooth to="#howitworks" className="navbar-link">
               <i className="fas fa-book" />&nbsp;&nbsp;How It Works
             </Link>
           </NavbarItem>

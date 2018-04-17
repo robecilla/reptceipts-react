@@ -7,11 +7,6 @@ import * as actions from '../../Actions/Auth';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const loginStyle = {
-  width: '250px',
-  margin: '20px 0px'
-};
-
 class Login extends Component {
   static contextTypes = {
     router: PropTypes.object
@@ -30,7 +25,7 @@ class Login extends Component {
     return (
       <Container isFluid="isFluid">
         <Columns>
-          <Column style={loginStyle}>
+          <Column className="login">
             {this.props.loginError ? (
               <Error error={this.props.loginError} />
             ) : (

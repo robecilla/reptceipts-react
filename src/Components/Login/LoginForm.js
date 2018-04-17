@@ -34,49 +34,38 @@ class LoginForm extends Component {
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <div>
-        <Delete
-          isPulled="right"
-          onClick={() =>
-            this.props.dispatch({
-              type: TOGGLE_LOGIN,
-              isLoginActive: false
-            })
-          }
+      <form onSubmit={handleSubmit}>
+        <Field
+          name="email"
+          type="email"
+          component={BloomerField}
+          label="Your e-mail"
+          icon="fa fa-at"
         />
-        <form onSubmit={handleSubmit}>
-          <Field
-            name="email"
-            type="email"
-            component={BloomerField}
-            label="Your e-mail"
-            icon="fa fa-at"
-          />
 
-          <Field
-            name="password"
-            type="password"
-            component={BloomerField}
-            label="Your Password"
-            icon="fa fa-key"
-          />
+        <Field
+          name="password"
+          type="password"
+          component={BloomerField}
+          label="Your Password"
+          icon="fa fa-key"
+        />
 
-          <br />
+        <br />
 
-          <FieldBloomer>
-            <Control>
-              <Button
-                type="submit"
-                isColor="info"
-                isLoading={submitting}
-                isFullWidth
-              >
-                Log in
-              </Button>
-            </Control>
-          </FieldBloomer>
-        </form>
-      </div>
+        <FieldBloomer>
+          <Control>
+            <Button
+              type="submit"
+              isColor="info"
+              isLoading={submitting}
+              isFullWidth
+            >
+              Log in
+            </Button>
+          </Control>
+        </FieldBloomer>
+      </form>
     );
   }
 }
