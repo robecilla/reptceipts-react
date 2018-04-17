@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import NProgress from 'nprogress';
 import { ROOT_URL } from './config';
 import { SET_USER } from './User';
 
@@ -11,7 +11,7 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 /* Login */
 export function signinUser(values, history) {
   return function(dispatch) {
-    dispatch(showLoading());
+    NProgress.start();
     // Here values handles email and password
     const request = axios.post(`${ROOT_URL}/api/login`, values);
     request
@@ -34,7 +34,7 @@ export function signinUser(values, history) {
       })
       .then(() => {
         // Hide loader on request completion
-        dispatch(hideLoading());
+        NProgress.done();
       });
   };
 }
@@ -42,7 +42,7 @@ export function signinUser(values, history) {
 /* Register */
 export function registerUser(values, history) {
   return function(dispatch) {
-    dispatch(showLoading());
+    NProgress.start();
     axios
       .post(`${ROOT_URL}/api/register`, values)
       .then(response => {
@@ -63,7 +63,7 @@ export function registerUser(values, history) {
       })
       .then(() => {
         // Hide loader on request completion
-        dispatch(hideLoading());
+        NProgress.done();
       });
   };
 }

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { showLoading, hideLoading } from 'react-redux-loading-bar';
+//import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import NProgress from 'nprogress';
 import { ROOT_URL } from './config';
 
 export const SET_USER = 'SET_USER';
@@ -10,7 +11,7 @@ export const TOGGLE_RECEIPTS_LOADER = 'TOGGLE_RECEIPTS_LOADER';
 
 export function getUser() {
   return function(dispatch) {
-    dispatch(showLoading());
+    NProgress.start();
     /* JWT determines the identity of the user */
     let token = localStorage.getItem('token');
 
@@ -39,7 +40,7 @@ export function getUser() {
         })
         .then(() => {
           // Hide loader on request completion
-          dispatch(hideLoading());
+          NProgress.done();
         });
     }
   };
@@ -87,7 +88,7 @@ export function getUserReceipts() {
 
 export function updateDetails(values, getUser) {
   return function(dispatch) {
-    dispatch(showLoading());
+    NProgress.start();
     values._method = 'PUT';
     axios({
       method: 'POST',
@@ -124,14 +125,14 @@ export function updateDetails(values, getUser) {
       })
       .then(() => {
         // Hide loader on request completion
-        dispatch(hideLoading());
+        NProgress.done();
       });
   };
 }
 
 export function deleteAccount(id) {
   return function(dispatch) {
-    dispatch(showLoading());
+    NProgress.start();
     axios({
       method: 'DELETE',
       url: `${ROOT_URL}/api/user/${id}`,
@@ -162,7 +163,7 @@ export function deleteAccount(id) {
       })
       .then(() => {
         // Hide loader on request completion
-        dispatch(hideLoading());
+        NProgress.done();
       });
   };
 }
