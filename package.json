@@ -12,6 +12,7 @@
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "moment": "^2.21.0",
+    "nprogress": "^0.2.0",
     "prettier": "^1.9.2",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
