@@ -8,11 +8,8 @@ import { Link } from 'react-router-dom';
 
 import apk from '../../../../Assets/apk/app-release.apk';
 
-import { Column, Label, Subtitle, Notification } from 'bloomer';
+import { Column, Subtitle, Notification, Icon } from 'bloomer';
 import ReceiptCard from './ReceiptCard';
-import { Button } from 'bloomer/lib/elements/Button';
-import { HeroBody } from 'bloomer/lib/layout/Hero/HeroBody';
-import { Icon } from 'bloomer/lib/elements/Icon';
 import { List } from 'react-content-loader';
 
 function isEmpty(obj) {
@@ -78,10 +75,8 @@ class ReceiptList extends Component {
           }}
         >
           <Notification hasTextAlign="centered">
-            <Subtitle isSize={5}>
-              Sorry you appear to not have any receipts
-            </Subtitle>
             <p>
+              Oh no! Seems like you have not scanned anything yet ..
               <a href={apk} download>
                 {' '}
                 Download{' '}
@@ -141,6 +136,8 @@ class ReceiptList extends Component {
               id={receipt.id}
               retailer_name={receipt.retailer_name}
               subtotal={receipt.subtotal}
+              created_at={receipt.created_at}
+              is_redeemable={receipt.is_redeemable}
             />
           ))
         ) : (

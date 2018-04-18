@@ -43,7 +43,7 @@ class Receipt extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    this.props.receiptActions.getReceiptDetail(id);
+    this.props.receiptActions.getReceiptDetail(id, this.context.router.history);
   }
 
   handleDelete(id) {
@@ -93,24 +93,6 @@ class Receipt extends Component {
           <List style={{ width: 600, height: 300 }} />
         ) : (
           <div>
-            <Container>
-              <Label
-                style={{ cursor: 'pointer' }}
-                onClick={this.toggleCollapse}
-              >
-                More <Icon icon="angle-down" isSize="small" />
-              </Label>
-
-              <Collapse isOpened={this.state.isCollapseOpen}>
-                <Button
-                  isSize="small"
-                  isColor="danger"
-                  onClick={() => this.setState({ isModalActive: true })}
-                >
-                  Delete receipt
-                </Button>
-              </Collapse>
-            </Container>
             <Box>
               <Content hasTextAlign="centered">
                 <Subtitle>{retailer.name}</Subtitle>
@@ -137,6 +119,11 @@ class Receipt extends Component {
                 <small>
                   Paid with&nbsp;
                   {receipt.payment_method}
+                </small>
+                <br />
+                <small>
+                  Scanned via&nbsp;
+                  {receipt.scan_type === 1 ? 'QR' : 'NFC'}
                 </small>
                 <br />
                 <br />
@@ -186,6 +173,25 @@ class Receipt extends Component {
                 </Table>
               </Content>
             </Box>
+            <span style={{ float: 'right' }}>
+              <Label
+                hasTextAlign="right"
+                style={{ cursor: 'pointer' }}
+                onClick={this.toggleCollapse}
+              >
+                More <Icon icon="angle-down" isSize="small" />
+              </Label>
+
+              <Collapse isOpened={this.state.isCollapseOpen}>
+                <Button
+                  isSize="small"
+                  isColor="danger"
+                  onClick={() => this.setState({ isModalActive: true })}
+                >
+                  Delete receipt
+                </Button>
+              </Collapse>
+            </span>
           </div>
         )}
 
