@@ -27,7 +27,7 @@ class Nav extends Component {
     this.burgerClick = this.burgerClick.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.props.getUser();
+    if (this.props.authenticated) this.props.getUser();
   }
 
   burgerClick(newState) {
