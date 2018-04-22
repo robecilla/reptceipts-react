@@ -52,7 +52,7 @@ export default class Items extends Component {
             </Column>
           </Columns>
         ))}
-        <hr />
+        <br />
         {totals.map(total => (
           <Total key={i++} label={total.label} total={total.total} />
         ))}

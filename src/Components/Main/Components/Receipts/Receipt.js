@@ -58,7 +58,6 @@ class Receipt extends Component {
           <div>
             <Box>
               <Header retailer={retailer} />
-              <hr />
               <Detail receipt={receipt} />
               <hr />
               <Items receipt={receipt} items={items} />
