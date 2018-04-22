@@ -46,6 +46,7 @@ class RegisterForm extends Component {
           name="username"
           type="text"
           component={BloomerField}
+          placeholder="username"
           heading="Username"
           icon="fa fa-user"
         />
@@ -54,6 +55,7 @@ class RegisterForm extends Component {
           name="email"
           type="email"
           component={BloomerField}
+          placeholder="you@domain.com"
           heading="Your e-mail"
           icon="fa fa-at"
         />
@@ -62,6 +64,7 @@ class RegisterForm extends Component {
           name="password"
           type="password"
           component={BloomerField}
+          placeholder="choose wisely"
           heading="Create a password"
           icon="fa fa-key"
         />

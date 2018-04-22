@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
-import { Title, HeroBody, Columns, Column, Content, Button } from 'bloomer';
+import {
+  Subtitle,
+  Title,
+  HeroBody,
+  Columns,
+  Column,
+  Content,
+  Image
+} from 'bloomer';
 
 import text from './text_nodes.json';
-
-const mockStyle = {
-  maxWidth: '48%',
-  margin: '30px 20px'
-};
+import mock from '../../../Assets/img/mock1.png';
 
 class HowItWorks extends Component {
   render() {
@@ -16,22 +20,36 @@ class HowItWorks extends Component {
       <HeroBody
         id="howitworks"
         style={{
-          height: '100vh',
-          backgroundColor: '#209cee',
-          color: 'white'
+          height: '100vh'
         }}
       >
         <Columns isMultiline>
-          <Column isSize={12} hasTextAlign="centered">
-            <Title>How it works</Title>
-          </Column>
           {text.map(t => (
-            <Column hasTextAlign="centered" key={i++}>
-              <img src={t.img.path} style={mockStyle} alt="mock" />
-              <Content>
-                <Title isSize={5}>{t.title}</Title>
-                <p>{t.text}</p>
-              </Content>
+            <Column
+              isSize={12}
+              key={i++}
+              style={{
+                background: 'rgb(250, 250, 250)',
+                borderBottom: '1px solid rgb(234, 234, 234)',
+                borderColor: 'rgb(234, 234, 234)'
+              }}
+            >
+              <Columns>
+                <Column>
+                  <Content>
+                    <Title style={{ margin: '20px 0px 50px 0px' }} isSize={4}>
+                      {t.title}
+                    </Title>
+                    <Subtitle isSize={6}> {t.header}</Subtitle>
+                    <ul style={{ fontSize: '14px' }}>
+                      {t.bullets.map(b => <li>{b}</li>)}
+                    </ul>
+                  </Content>
+                </Column>
+                <Column style={{ padding: '70' }}>
+                  <Image src="https://via.placeholder.com/640x340" alt="mock" />
+                </Column>
+              </Columns>
             </Column>
           ))}
         </Columns>

@@ -38,20 +38,18 @@ class LoginForm extends Component {
         <Field
           name="email"
           type="email"
+          placeholder="your email"
           component={BloomerField}
-          label="Your e-mail"
           icon="fa fa-at"
         />
 
         <Field
           name="password"
           type="password"
+          placeholder="your password"
           component={BloomerField}
-          label="Your Password"
           icon="fa fa-key"
         />
-
-        <br />
 
         <FieldBloomer>
           <Control>
