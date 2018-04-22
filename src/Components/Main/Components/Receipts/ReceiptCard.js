@@ -31,7 +31,7 @@ class ReceiptCard extends Component {
               {subtotal} &#183;{' '}
               <Moment format="DD MMM YYYY">{created_at}</Moment>
               {is_redeemable ? (
-                <i class="fas fa-gift" style={{ float: 'right' }} />
+                <i className="fas fa-gift" style={{ float: 'right' }} />
               ) : (
                 false
               )}

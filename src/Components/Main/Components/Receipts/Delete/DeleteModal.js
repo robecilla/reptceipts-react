@@ -10,7 +10,7 @@ import {
   Column
 } from 'bloomer';
 
-class DeleteModal extends Component {
+export default class DeleteModal extends Component {
   render() {
     const { isActive, receipt_id } = this.props;
     return (
@@ -48,5 +48,3 @@ class DeleteModal extends Component {
     );
   }
 }
-
-export default DeleteModal;

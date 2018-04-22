@@ -1,63 +1,27 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Moment from 'react-moment';
-import { List } from 'react-content-loader';
-import { Collapse } from 'react-collapse';
-import PropTypes from 'prop-types';
 
-import DeleteModal from './DeleteModal';
+import { Column, Box } from 'bloomer';
+import { List } from 'react-content-loader';
+
+import Header from './Receipt/Header';
+import Detail from './Receipt/Detail';
+import Items from './Receipt/Items';
+import Delete from './Delete/Delete';
 
 import * as receiptActions from '../../../../Actions/Receipt';
 import * as userActions from '../../../../Actions/User';
-
-import {
-  Column,
-  Subtitle,
-  Content,
-  Box,
-  Table,
-  Button,
-  Label,
-  Icon,
-  Container
-} from 'bloomer';
 
 class Receipt extends Component {
   static contextTypes = {
     router: PropTypes.object
   };
 
-  constructor() {
-    super();
-    this.state = {
-      isCollapseOpen: false,
-      isModalActive: false
-    };
-    this.toggleCollapse = this.toggleCollapse.bind(this);
-  }
-
-  toggleCollapse() {
-    this.setState({ isCollapseOpen: !this.state.isCollapseOpen });
-  }
-
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.receiptActions.getReceiptDetail(id, this.context.router.history);
-  }
-
-  handleDelete(id) {
-    this.props.receiptActions.deleteReceipt(
-      id,
-      this.props.userActions.getUserReceipts,
-      this.context.router.history
-    );
-
-    this.setState({ isModalActive: false });
-  }
-
-  closeModal() {
-    this.setState({ isModalActive: false });
   }
 
   render() {
@@ -76,7 +40,6 @@ class Receipt extends Component {
       );
     }
 
-    let i = 0;
     const retailer = this.props.receiptDetail.retailer;
     const receipt = this.props.receiptDetail.receipt;
     const items = JSON.parse(this.props.receiptDetail.receipt.items);
@@ -94,113 +57,19 @@ class Receipt extends Component {
         ) : (
           <div>
             <Box>
-              <Content hasTextAlign="centered">
-                <Subtitle>{retailer.name}</Subtitle>
-                <div>
-                  {retailer.address1}, {retailer.address2}
-                </div>
-                <div>
-                  {retailer.address3} - {retailer.postcode}
-                </div>
-                <div>
-                  {retailer.phone_number} - {retailer.mobile_number}
-                </div>
-                <div>
-                  <a href={`mailto:${retailer.email}`}>{retailer.email}</a>
-                </div>
-              </Content>
+              <Header retailer={retailer} />
               <hr />
-              <Content>
-                <small>
-                  <strong>Date: </strong>
-                  <Moment format="DD MMM YYYY">{receipt.created_at}</Moment>
-                </small>
-                <br />
-                <small>
-                  Paid with&nbsp;
-                  {receipt.payment_method}
-                </small>
-                <br />
-                <small>
-                  Scanned via&nbsp;
-                  {receipt.scan_type === 1 ? 'QR' : 'NFC'}
-                </small>
-                <br />
-                <br />
-                <Table isNarrow>
-                  <thead>
-                    <tr>
-                      <th>Ref</th>
-                      <th>Product</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* Loops through user receipts and render */
-                    items.map(item => (
-                      <tr key={i++}>
-                        <td>
-                          <small>{item.serial_no}</small>
-                        </td>
-                        <td>{item.name}</td>
-                        <td>x{item.quantity}</td>
-                        <td>{item.price}</td>
-                      </tr>
-                    ))}
-                    <tr>
-                      <td colSpan="2" />
-                      <td>Total:</td>
-                      <td>{receipt.total}</td>
-                    </tr>
-                    <tr>
-                      <td colSpan="2" />
-                      <td>VAT ({receipt.VAT_value}%):</td>
-                      <td>{receipt.VAT}</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colSpan="2" />
-                      <td>
-                        <strong>Subtotal:</strong>
-                      </td>
-                      <td>
-                        <strong>{receipt.subtotal}</strong>
-                      </td>
-                    </tr>
-                  </tfoot>
-                </Table>
-              </Content>
+              <Detail receipt={receipt} />
+              <hr />
+              <Items receipt={receipt} items={items} />
             </Box>
-            <span style={{ float: 'right' }}>
-              <Label
-                hasTextAlign="right"
-                style={{ cursor: 'pointer' }}
-                onClick={this.toggleCollapse}
-              >
-                More <Icon icon="angle-down" isSize="small" />
-              </Label>
-
-              <Collapse isOpened={this.state.isCollapseOpen}>
-                <Button
-                  isSize="small"
-                  isColor="danger"
-                  onClick={() => this.setState({ isModalActive: true })}
-                >
-                  Delete receipt
-                </Button>
-              </Collapse>
-            </span>
+            <Delete
+              receipt_id={receipt.id}
+              deleteReceipt={this.props.receiptActions.deleteReceipt}
+              getUserReceipts={this.props.userActions.getUserReceipts}
+            />
           </div>
         )}
-
-        <DeleteModal
-          isActive={this.state.isModalActive}
-          receipt_id={receipt.id}
-          handleDelete={id => this.handleDelete(id)}
-          closeModal={() => this.closeModal()}
-        />
       </Column>
     );
   }

@@ -12,12 +12,7 @@ import { Column, Subtitle, Notification, Icon } from 'bloomer';
 import ReceiptCard from './ReceiptCard';
 import { List } from 'react-content-loader';
 
-function isEmpty(obj) {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) return false;
-  }
-  return true;
-}
+import { isEmpty } from '../../../Helpers/helpers.js';
 
 const KEYS_TO_FILTERS = ['retailer_name', 'subtotal'];
 
@@ -75,8 +70,9 @@ class ReceiptList extends Component {
           }}
         >
           <Notification hasTextAlign="centered">
+            <p>Oh no! Seems like you have not scanned anything yet ..</p>
+            <hr />
             <p>
-              Oh no! Seems like you have not scanned anything yet ..
               <a href={apk} download>
                 {' '}
                 Download{' '}
