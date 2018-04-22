@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { ROOT_URL } from '../../../../../../Actions/config';
 import { Field, FieldBody, Input, TextArea, Control, Button } from 'bloomer';
-
-function isEmpty(obj) {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) return false;
-  }
-  return true;
-}
+import { isEmpty } from '../../../../../Helpers/helpers.js';
 
 class Parameters extends Component {
   constructor(props) {
