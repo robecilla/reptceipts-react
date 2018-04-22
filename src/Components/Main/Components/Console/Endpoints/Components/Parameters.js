@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as userActions from '../../../../../../Actions/User';
+
 import axios from 'axios';
 import { ROOT_URL } from '../../../../../../Actions/config';
 import { Field, FieldBody, Input, TextArea, Control, Button } from 'bloomer';
@@ -12,10 +15,12 @@ class Parameters extends Component {
       qr: false,
       textarea: ''
     };
+
     this.submitRequest = this.submitRequest.bind(this);
     this.setInput = this.setInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +54,10 @@ class Parameters extends Component {
 
   handleChange(e) {
     this.setState({ textarea: e.target.value });
+  }
+
+  handleInputChange(e) {
+    this.setState({ inputValue: e.target.value });
   }
 
   submitRequest(e) {
@@ -92,22 +101,23 @@ class Parameters extends Component {
       method = 'POST';
     }
 
-    axios.defaults.headers.common['Authorization'] =
-      'Bearer ' + localStorage.getItem('console_token');
-
     axios({
       method: method,
       url: ROOT_URL + url,
-      data: data
+      data: data,
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     })
       .then(response => {
         console.log(response);
         if (qr) response.data.qr = qr;
-
         /* Passing result back to Endpoint.js */
         this.props.callbackParent(response.data);
+        /* If the request its either post a receipt or delete a receipt, update user details */
+        if (this.props.endpoint_id === 14 || this.props.endpoint_id === 16)
+          this.props.getUserReceipts();
       })
       .catch(err => {
+        console.log(err);
         console.log(err.response);
         let error = {};
         if (err.response.status === 404) {
@@ -150,11 +160,13 @@ class Parameters extends Component {
                   type={param.type}
                   name={param.name}
                   placeholder={param.name}
-                  defaultValue={
-                    this.state.inputValue && param.name === 'id'
+                  value={
+                    this.state.inputValue &&
+                    (param.name === 'id' || param.name === 'user_id')
                       ? this.state.inputValue
                       : ''
                   }
+                  onChange={this.handleInputChange}
                 />
                 {(url === '/api/user/{id}' && param.name === 'id') ||
                 param.name === 'user_id' ? (
@@ -199,4 +211,4 @@ class Parameters extends Component {
   }
 }
 
-export default Parameters;
+export default connect(null, userActions)(Parameters);
