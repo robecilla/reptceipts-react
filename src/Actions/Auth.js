@@ -22,7 +22,6 @@ export function signinUser(values, history) {
         dispatch({
           type: AUTH_USER
         });
-
         getThisUser(response.data.response.token, dispatch, history);
       })
       // If bad request, call the error handler
@@ -52,7 +51,6 @@ export function registerUser(values, history) {
         dispatch({
           type: AUTH_USER
         });
-
         getThisUser(response.data.response.token, dispatch, history);
       })
       .catch(error => {
@@ -70,7 +68,6 @@ export function registerUser(values, history) {
 
 export function signoutUser() {
   localStorage.removeItem('token');
-  localStorage.removeItem('console_token');
   return {
     type: UNAUTH_USER
   };
@@ -80,10 +77,9 @@ function getThisUser(token, dispatch, history) {
   axios({
     method: 'GET',
     url: `${ROOT_URL}/api/user/JWTuser`,
-    headers: { Authorization: 'Bearer ' + token }
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
   })
     .then(response => {
-      console.log(response);
       if (response.status >= 200 && response.status < 300) {
         dispatch({
           type: SET_USER,
@@ -94,6 +90,7 @@ function getThisUser(token, dispatch, history) {
       }
     })
     .catch(error => {
+      console.log(error);
       if (error.response.status === 401) {
         window.location = '/signout';
       }

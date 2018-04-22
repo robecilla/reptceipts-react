@@ -13,36 +13,31 @@ export function getUser() {
   return function(dispatch) {
     NProgress.start();
     /* JWT determines the identity of the user */
-    let token = localStorage.getItem('token');
-
-    if (token) {
-      axios({
-        method: 'GET',
-        url: `${ROOT_URL}/api/user/JWTuser`,
-        headers: { Authorization: 'Bearer ' + token }
+    axios({
+      method: 'GET',
+      url: `${ROOT_URL}/api/user/JWTuser`,
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+    })
+      .then(response => {
+        console.log(response);
+        if (response.status >= 200 && response.status < 300) {
+          dispatch({
+            type: SET_USER,
+            payload: response.data.response.user
+          });
+        }
       })
-        .then(response => {
-          console.log(response);
-          if (response.status >= 200 && response.status < 300) {
-            dispatch({
-              type: SET_USER,
-              payload: response.data.response.user
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-          console.log(error.response);
-
-          if (error.response.status === 401) {
-            window.location = '/signout';
-          }
-        })
-        .then(() => {
-          // Hide loader on request completion
-          NProgress.done();
-        });
-    }
+      .catch(error => {
+        console.log(error);
+        console.log(error.response);
+        if (error.response.status === 401) {
+          window.location = '/signout';
+        }
+      })
+      .then(() => {
+        // Hide loader on request completion
+        NProgress.done();
+      });
   };
 }
 
@@ -53,12 +48,10 @@ export function getUserReceipts() {
       payload: true
     });
     /* JWT determines the identity of the user */
-    let token = localStorage.getItem('token');
-
     axios({
       method: 'GET',
       url: `${ROOT_URL}/api/receipt`,
-      headers: { Authorization: 'Bearer ' + token }
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     })
       .then(response => {
         console.log(response);
@@ -93,8 +86,8 @@ export function updateDetails(values, getUser) {
     axios({
       method: 'POST',
       url: `${ROOT_URL}/api/user/${values.id}`,
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
-      data: values
+      data: values,
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
     })
       .then(response => {
         console.log(response);
@@ -107,21 +100,13 @@ export function updateDetails(values, getUser) {
         }
       })
       .catch(error => {
-        console.log(error.response);
-        if (error.response) {
-          dispatch({
-            type: UPDATE_RESULT,
-            payload: error.response
-          });
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
+        if (error.response.status === 401) {
+          window.location = '/signout';
         }
+        dispatch({
+          type: UPDATE_RESULT,
+          payload: error.response
+        });
       })
       .then(() => {
         // Hide loader on request completion
@@ -145,21 +130,13 @@ export function deleteAccount(id) {
         }
       })
       .catch(error => {
-        console.log(error.response);
-        if (error.response) {
-          dispatch({
-            type: DELETE_RESULT,
-            payload: error.response
-          });
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
+        if (error.response.status === 401) {
+          window.location = '/signout';
         }
+        dispatch({
+          type: DELETE_RESULT,
+          payload: error.response
+        });
       })
       .then(() => {
         // Hide loader on request completion
