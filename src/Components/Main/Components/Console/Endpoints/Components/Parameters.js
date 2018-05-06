@@ -11,7 +11,6 @@ class Parameters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: false,
       qr: false,
       textarea: ''
     };
@@ -20,7 +19,6 @@ class Parameters extends Component {
     this.setInput = this.setInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -54,10 +52,6 @@ class Parameters extends Component {
 
   handleChange(e) {
     this.setState({ textarea: e.target.value });
-  }
-
-  handleInputChange(e) {
-    this.setState({ inputValue: e.target.value });
   }
 
   submitRequest(e) {
@@ -117,8 +111,6 @@ class Parameters extends Component {
           this.props.getUserReceipts();
       })
       .catch(err => {
-        console.log(err);
-        console.log(err.response);
         let error = {};
         if (err.response.status === 404) {
           error.code = err.response.status;
@@ -160,26 +152,7 @@ class Parameters extends Component {
                   type={param.type}
                   name={param.name}
                   placeholder={param.name}
-                  value={
-                    this.state.inputValue &&
-                    (param.name === 'id' || param.name === 'user_id')
-                      ? this.state.inputValue
-                      : ''
-                  }
-                  onChange={this.handleInputChange}
                 />
-                {(url === '/api/user/{id}' && param.name === 'id') ||
-                param.name === 'user_id' ? (
-                  <Button
-                    isColor="info"
-                    onClick={this.setInput}
-                    style={{ width: 115, marginLeft: 20 }}
-                  >
-                    Me
-                  </Button>
-                ) : (
-                  false
-                )}
               </FieldBody>
             </Field>
           ))

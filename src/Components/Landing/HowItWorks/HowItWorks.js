@@ -42,7 +42,7 @@ class HowItWorks extends Component {
                     </Title>
                     <Subtitle isSize={6}> {t.header}</Subtitle>
                     <ul style={{ fontSize: '14px' }}>
-                      {t.bullets.map(b => <li>{b}</li>)}
+                      {t.bullets.map(b => <li key={i++}>{b}</li>)}
                     </ul>
                   </Content>
                 </Column>
