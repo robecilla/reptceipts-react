@@ -23,7 +23,7 @@ class Register extends Component {
 
   render() {
     return (
-      <HeroBody style={{ height: '100vh' }}>
+      <HeroBody>
         <Columns isMultiline>
           <Column
             isSize={{ widescreen: 12, desktop: 12, tablet: 12, mobile: 'full' }}

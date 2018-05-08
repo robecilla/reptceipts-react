@@ -70,8 +70,7 @@ class ReceiptList extends Component {
           }}
         >
           <Notification hasTextAlign="centered">
-            <p>Oh no! Seems like you have not scanned anything yet ..</p>
-            <hr />
+            <p>Seems like you have not scanned anything yet ..</p>
             <p>
               <a href={apk} download>
                 {' '}

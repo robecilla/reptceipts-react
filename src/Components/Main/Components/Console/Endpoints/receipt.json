@@ -74,18 +74,6 @@
             "type": "text"
           }
         ]
-      },
-      {
-        "id": 17,
-        "method": "GET",
-        "url": "/api/receipt/getNFC/{id}",
-        "description": "Retuns a receipt for NFC scan",
-        "params": [
-          {
-            "name": "id",
-            "type": "text"
-          }
-        ]
       }
     ]
   }

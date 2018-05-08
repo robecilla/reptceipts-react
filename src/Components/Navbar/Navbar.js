@@ -74,11 +74,6 @@ class Nav extends Component {
     } else {
       return (
         <NavbarEnd>
-          <NavbarItem hasDropdown isHoverable>
-            <Link smooth to="#howitworks" className="navbar-link">
-              <i className="fas fa-book" />&nbsp;&nbsp;How It Works
-            </Link>
-          </NavbarItem>
           <NavbarItem
             hasDropdown
             isHoverable
