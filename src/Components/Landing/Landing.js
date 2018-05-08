@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import Register from './Register/Register';
-import HowItWorks from './HowItWorks/HowItWorks';
 
 class Landing extends Component {
   render() {
@@ -19,12 +18,7 @@ class Landing extends Component {
         />
       );
     } else {
-      return (
-        <div>
-          <Register />
-          <HowItWorks />
-        </div>
-      );
+      return <Register />;
     }
   }
 }
